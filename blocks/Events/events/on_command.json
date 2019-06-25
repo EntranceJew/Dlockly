@@ -1,0 +1,30 @@
+{
+  "restrictions": {
+    "type": "blockexists",
+    "message": "To use the 'on command' event, a 'set prefix' block must exist",
+    "types": [
+      "set_prefix"
+    ]
+  },
+  "block": {
+    "type": "on_command",
+    "message0": "on command received %1 %2 %3",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "cmd",
+        "text": "help"
+      },
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "code"
+      }
+    ],
+    "colour": 0,
+    "tooltip": "Triggers when a command is received",
+    "helpUrl": ""
+  }
+}

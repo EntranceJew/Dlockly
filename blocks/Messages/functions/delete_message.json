@@ -1,0 +1,25 @@
+{
+  "restrictions": {
+    "type": "!toplevelparent",
+    "message": "The 'delete message' block may not be used in a 'configuration' event",
+    "types": [
+      "configuration"
+    ]
+  },
+  "block": {
+    "type": "delete_message",
+    "message0": "delete message %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "msg",
+        "check": "Message"
+      }
+    ],
+    "inputsInline": true,
+    "output": "RunnableAction",
+    "colour": 90,
+    "tooltip": "Deletes a message",
+    "helpUrl": ""
+  }
+}
