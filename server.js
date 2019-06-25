@@ -1,19 +1,11 @@
-const dotenv = require('dotenv');
-dotenv.config();
-
-const cmd = require("node-cmd");
-const crypto = require("crypto");
-const request = require('request-promise');
+require('dotenv').config();
 const http = require("http");
-const https = require("https");
 const express = require('express');
 const Discord = require('discord.js');
-const sql = require('better-sqlite3');
 const fs = require('fs');
 const read = require('fs-readdir-recursive');
-const querystring = require('querystring');
-const ejs = require('ejs');
 const uap = require('express-useragent');
+const path = require('path');
 
 var web = express();
 web.set("views", __dirname);
@@ -21,7 +13,7 @@ web.use(uap.express());
 const bot = new Discord.Client();
 
 async function boot() {
-  await bot.login(process.env.DISCORD_TOKEN);
+  bot.login(process.env.DISCORD_TOKEN);
   web.listen(process.env.PORT);
 }
 
@@ -36,44 +28,100 @@ web.get('*', async (req, res) => {
     var categories = [];
     var restrictions = {};
 
-    var files = read("./blocks/Discord/").filter(f => f.endsWith(".json"));
-    files.forEach(f => {
-      var json = JSON.parse(fs.readFileSync("./blocks/Discord/" + f));
-      var splits = f.split(/[\/\\]+/g);
-      var category = splits[0];
-
-      if (json.block) blocks.push(json.block);
-      else if (json.js_block) blocks.push(json.js_block);
-      else return;
-
-      if (json.max) max[json.block.type] = json.max;
-
-      if (json.restrictions) restrictions[json.block ? json.block.type : json.js_block.type] = json.restrictions;
-
-      if (splits[0] && splits[1]) {
-        if (categories.find(o => o.name == category)) categories.filter(o => o.name == category)[0].blocks.push(json.block ? json.block.type : json.js_block.type);
-        else categories.push({
-          name: category,
-          color: (json.block ? json.block : json.js_block).colour,
-          blocks: [json.block ? json.block.type : json.js_block.type]
-        })
-      } else {
-        if (categories.find(o => o.name == "Discord")) categories.filter(o => o.name == "Discord")[0].blocks.push(json.block ? json.block.type : json.js_block.type);
-        else categories.push({
-          name: "Discord",
-          blocks: [json.block ? json.block.type : json.js_block.type]
-        })
-      }
-    })
+    var categories = initializeCategoriesRecursively("./blocks/");
+    var {
+      blocks,
+      max,
+      restrictions
+    } = initializeBlocksRecursively("./blocks/", categories);
 
     res.render("src/dlockly.ejs", {
       blocks: blocks,
       max: JSON.stringify(max),
       categories: categories,
       restrictions: JSON.stringify(restrictions),
+      xmlCategoryTree: generateXmlTreeRecursively(categories),
     });
   }
 });
+
+function generateXmlTreeRecursively(categories) {
+  var result = "";
+  for (var c of categories) {
+    result += "<category name='" + c.name + "' colour='" + c.color + "'>";
+    result += generateXmlTreeRecursively(c.subcategories);
+    for (var b of c.blocks) {
+      result += "<block type='" + b + "'></block>";
+    }
+    result += "</category>"
+  }
+  return result;
+}
+
+function initializeBlocksRecursively(p, categories) {
+  var blocks = [];
+  var max = {};
+  var restrictions = {};
+
+  var files = read(p).filter(f => f.endsWith(".json"));
+
+  for (var f of files) {
+    if (f.startsWith("/") || f.startsWith("\\")) f = f.substring(1);
+    if (f.endsWith("/") || f.endsWith("\\")) f.substr(0, f.length - 1);
+
+    var json = JSON.parse(fs.readFileSync(path.join("./blocks/", f)));
+    var splits = f.split(/[\/\\]+/g);
+    var fileName = splits.pop();
+
+    blocks.push(json.block);
+
+    if (json.max) max[json.block.type] = json.max;
+
+    if (json.restrictions) restrictions[json.block.type] = json.restrictions;
+
+    var desiredCategoryName = splits.pop();
+    var desiredCategory = findCategoryRecursively(categories, desiredCategoryName);
+
+    if (desiredCategory) desiredCategory.blocks.push(json.block.type);
+    else console.warn("Category '" + desiredCategory + "' required for block '" + json.block.type + "' was not found.");
+  }
+
+  return {
+    blocks: blocks,
+    max: max,
+    restrictions: restrictions,
+  };
+}
+
+function findCategoryRecursively(categories, cat) {
+  for (var c of categories) {
+    if (c.name == cat) return c;
+
+    var subcat = findCategoryRecursively(c.subcategories, cat);
+    if (subcat) return subcat;
+  }
+}
+
+function initializeCategoriesRecursively(p) {
+  var isDirectory = source => fs.lstatSync(source).isDirectory();
+  var dirs = fs.readdirSync(p).map(name => path.join(p, name)).filter(isDirectory);
+
+  var result = [];
+  for (var dir of dirs) {
+    result.push({
+      name: dir.split(/[\/\\]+/g).pop(),
+      color: Number.parseInt(fs.readFileSync(path.join(dir, "/.color"))),
+      subcategories: initializeCategoriesRecursively(dir),
+      blocks: [],
+    });
+  }
+
+  return result;
+}
+
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
 
 process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);

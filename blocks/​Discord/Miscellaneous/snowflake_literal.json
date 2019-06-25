@@ -18,7 +18,7 @@
     ],
     "inputsInline": true,
     "output": null,
-    "colour": 330,
+    "colour": 150,
     "tooltip": "Creates a Snowflake/ID",
     "helpUrl": ""
   }
