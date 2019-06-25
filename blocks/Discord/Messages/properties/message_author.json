@@ -1,4 +1,11 @@
 {
+  "restrictions": {
+    "type": "!toplevelparent",
+    "message": "The 'delete message' block may not be used in a 'configuration' event",
+    "types": [
+      "configuration"
+    ]
+  },
   "block": {
     "type": "message_author",
     "message0": "get author of message %1",

@@ -1,4 +1,11 @@
 {
+  "restrictions": {
+    "type": "!toplevelparent",
+    "message": "The 'delete message' block may not be used in a 'configuration' event",
+    "types": [
+      "configuration"
+    ]
+  },
   "block": {
     "type": "snowflake_literal",
     "message0": "❄ %1",
