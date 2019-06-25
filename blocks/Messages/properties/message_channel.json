@@ -1,0 +1,18 @@
+{
+  "block": {
+    "type": "message_channel",
+    "message0": "get channel of message %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "msg",
+        "check": "Message"
+      }
+    ],
+    "inputsInline": true,
+    "output": "Channel",
+    "colour": 90,
+    "tooltip": "Gets the channel of a message",
+    "helpUrl": ""
+  }
+}

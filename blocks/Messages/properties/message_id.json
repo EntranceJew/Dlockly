@@ -1,0 +1,22 @@
+{
+  "block": {
+    "type": "message_id",
+    "message0": "get id of message %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "msg",
+        "check": "Message"
+      }
+    ],
+    "inputsInline": true,
+    "output": [
+      "Snowflake",
+      "Number",
+      "String"
+    ],
+    "colour": 90,
+    "tooltip": "Gets the id of a message",
+    "helpUrl": ""
+  }
+}

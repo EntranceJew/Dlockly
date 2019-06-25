@@ -1,0 +1,19 @@
+{
+  "max": 1,
+  "block": {
+    "type": "on_message",
+    "message0": "on message received %1 %2",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "code"
+      }
+    ],
+    "colour": 0,
+    "tooltip": "Triggers when a message is received",
+    "helpUrl": ""
+  }
+}

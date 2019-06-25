@@ -1,0 +1,31 @@
+{
+  "restrictions": {
+    "type": "!toplevelparent",
+    "message": "The 'rename message' block may not be used in a 'configuration' event",
+    "types": [
+      "configuration"
+    ]
+  },
+  "block": {
+    "type": "edit_message",
+    "message0": "edit message %1 new text %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "msg",
+        "check": "MyMessage"
+      },
+      {
+        "type": "input_value",
+        "name": "new",
+        "check": "String",
+        "align": "RIGHT"
+      }
+    ],
+    "inputsInline": false,
+    "output": "RunnableActionWithResult",
+    "colour": 90,
+    "tooltip": "Edits a message sent by the bot (and returns it)",
+    "helpUrl": ""
+  }
+}

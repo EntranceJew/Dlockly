@@ -1,0 +1,28 @@
+{
+  "restrictions": {
+    "type": "!toplevelparent",
+    "message": "The 'run' block may not be used in a 'configuration' event",
+    "types": [
+      "configuration"
+    ]
+  },
+  "block": {
+    "type": "run",
+    "message0": "run %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "value",
+        "check": [
+          "RunnableAction",
+          "RunnableActionWithResult"
+        ]
+      }
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+    "colour": 330,
+    "tooltip": "",
+    "helpUrl": ""
+  }
+}
