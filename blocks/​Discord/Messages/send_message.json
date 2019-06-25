@@ -23,7 +23,8 @@
       }
     ],
     "inputsInline": false,
-    "output": "RunnableActionWithResult",
+    "previousStatement": null,
+    "nextStatement": null,
     "colour": 90,
     "tooltip": "Sends a message to a channel",
     "helpUrl": ""
