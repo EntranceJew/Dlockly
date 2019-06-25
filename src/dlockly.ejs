@@ -10,6 +10,7 @@
   <script src="blockly/msg/js/en.js"></script>
   <script src="src/util.js"></script>
   <script src="src/restrictions.js"></script>
+  <script src="src/cookies.js"></script>
 </head>
 
 <body>
@@ -358,7 +359,11 @@
     workspace.addChangeListener(Blockly.Events.disableOrphans);
     workspace.addChangeListener(disableUnapplicable);
 
-    setTimeout(() => { disableUnapplicable({ type: Blockly.Events.MOVE, workspaceId: workspace.id, }); }, 100);
+    setInterval(() => { disableUnapplicable({ type: Blockly.Events.MOVE, workspaceId: workspace.id, }); }, 1000);
+
+    if (cookieExists("xml")) Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(getCookie("xml")), workspace);
+
+    setInterval(() => { setCookie("xml", Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)), 30); })
   </script>
 </body>
 
