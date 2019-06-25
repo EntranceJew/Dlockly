@@ -16,8 +16,8 @@
         "check": "Message"
       }
     ],
-    "inputsInline": true,
-    "output": "RunnableAction",
+    "previousStatement": null,
+    "nextStatement": null,
     "colour": 90,
     "tooltip": "Deletes a message",
     "helpUrl": ""
