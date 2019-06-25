@@ -1,13 +1,15 @@
 {
-  "restrictions": {
-    "type": "!toplevelparent",
-    "message": "The 'run and save output to variable' block may not be used in a 'configuration' event",
-    "types": [
-      "configuration"
-    ]
-  },
+  "restrictions": [
+    {
+      "type": "!toplevelparent",
+      "message": "The 'run' block may not be used in a 'configuration' event",
+      "types": [
+        "configuration"
+      ]
+    }
+  ],
   "block": {
-    "type": "run_var",
+    "type": "run",
     "message0": "run %1 and save output to variable %2",
     "args0": [
       {

@@ -1,45 +1,52 @@
 function disableUnapplicable(event) {
-  if (event.type != Blockly.Events.MOVE && event.type != Blockly.Events.CREATE) return;
-
   var workspace = Blockly.Workspace.getById(event.workspaceId);
   var blocks = workspace.getAllBlocks(false);
 
   for (var block of blocks) {
     if (!block) continue;
     if (!document.restrictions[block.type]) continue;
-    if (!validateConfiguration(block)) continue;
 
-    if (validaterestrictions(block, blocks)) {
+    var messages = [];
+
+    for (var res of document.restrictions[block.type]) {
+      if (!validateConfiguration(block, res)) continue;
+
+      if (!validateRestriction(block, blocks, res)) {
+        messages.push(decode(res.message));
+      }
+    }
+
+    if (messages.length < 1) {
       block.setDisabled(false);
       block.setWarningText(null);
-    } else if (!workspace.isDragging()) {
+    } else {
       block.setDisabled(true);
-      block.setWarningText(decode(document.restrictions[block.type].message));
+      block.setWarningText(messages.join('\n'));
     }
   }
 };
 
-function validaterestrictions(block, blocks) {
+function validateRestriction(block, blocks, res) {
   var reverse = false;
-  var type = document.restrictions[block.type].type;
+  var type = res.type;
   if (type.startsWith("!")) {
     type = type.substring(1);
     reverse = true;
   }
   switch (type) {
     case "toplevelparent":
-      return (document.restrictions[block.type].types.includes(getTopLevelParent(block).type)) != reverse;
+      return (res.types.includes(getTopLevelParent(block).type)) != reverse;
     case "blockexists":
-      return (blocks.filter(b => document.restrictions[block.type].types.includes(b.type) && !b.disabled).length > 0) != reverse;
+      return (blocks.filter(b => res.types.includes(b.type) && !b.disabled).length > 0) != reverse;
     case "parent":
-      return (document.restrictions[block.type].types.includes(block.getParent().type)) != reverse;
+      return (res.types.includes(block.getParent().type)) != reverse;
     default:
       return true;
   }
 }
 
-function validateConfiguration(block) {
-  switch (document.restrictions[block.type].type) {
+function validateConfiguration(block, res) {
+  switch (res.type) {
     case "toplevelparent":
     case "!toplevelparent":
       return getTopLevelParent(block) && !getTopLevelParent(block).disabled;
