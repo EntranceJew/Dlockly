@@ -22,5 +22,17 @@
     "colour": 45,
     "tooltip": "Changes the prefix of the bot",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = 'set_prefix(' + block.getFieldValue('prefix') + ');';",
+    "functions": [
+      {
+        "name": "set_prefix",
+        "parameters": [
+          "_prefix"
+        ],
+        "code": "bot.prefix = _prefix;"
+      }
+    ]
   }
 }

@@ -297,18 +297,7 @@
     <category name="Variables" colour="330" custom="VARIABLE"></category>
     <category name="Functions" colour="290" custom="PROCEDURE"></category>
     <sep></sep>
-    <category name="Discord" colour="227">
-      <% categories.filter(c => c.name != "Discord").forEach(v => { %>
-        <category name="<%= v.name %>" colour="<%= v.color %>">
-        <% v.blocks.forEach(b => { %>
-          <block type="<%= b %>"></block>
-        <% }); %>
-        </category>
-      <% }); %>
-      <% if (categories.filter(c => c.name == "Discord")[0]) categories.filter(c => c.name == "Discord")[0].blocks.forEach(b => { %>
-        <block type="<%= b %>"></block>
-      <% }); %>
-    </category>
+    <%- xmlCategoryTree %>
   </xml>
 
   <script>
