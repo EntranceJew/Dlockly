@@ -36,9 +36,9 @@ web.get('*', async (req, res) => {
     var categories = [];
     var restrictions = {};
 
-    var files = read("./blocks/").filter(f => f.endsWith(".json"));
+    var files = read("./blocks/Discord/").filter(f => f.endsWith(".json"));
     files.forEach(f => {
-      var json = JSON.parse(fs.readFileSync("./blocks/" + f));
+      var json = JSON.parse(fs.readFileSync("./blocks/Discord/" + f));
       var splits = f.split(/[\/\\]+/g);
       var category = splits[0];
 

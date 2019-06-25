@@ -1,0 +1,18 @@
+{
+  "block": {
+    "type": "snowflake_literal",
+    "message0": "❄ %1",
+    "args0": [
+      {
+        "type": "field_input",
+        "name": "var",
+        "text": "183249892712513536"
+      }
+    ],
+    "inputsInline": true,
+    "output": null,
+    "colour": 330,
+    "tooltip": "Creates a Snowflake/ID",
+    "helpUrl": ""
+  }
+}
