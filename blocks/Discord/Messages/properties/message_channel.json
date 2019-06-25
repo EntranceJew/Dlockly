@@ -1,4 +1,11 @@
 {
+  "restrictions": {
+    "type": "!toplevelparent",
+    "message": "The 'delete message' block may not be used in a 'configuration' event",
+    "types": [
+      "configuration"
+    ]
+  },
   "block": {
     "type": "message_channel",
     "message0": "get channel of message %1",
