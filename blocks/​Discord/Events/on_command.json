@@ -1,11 +1,13 @@
 {
-  "restrictions": {
-    "type": "blockexists",
-    "message": "To use the 'on command' event, a 'set prefix' block must exist",
-    "types": [
-      "set_prefix"
-    ]
-  },
+  "restrictions": [
+    {
+      "type": "blockexists",
+      "message": "To use the 'on command' event, a 'set prefix' block must exist",
+      "types": [
+        "set_prefix"
+      ]
+    }
+  ],
   "block": {
     "type": "on_command",
     "message0": "on command received %1 %2 %3",

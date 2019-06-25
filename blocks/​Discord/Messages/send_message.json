@@ -1,11 +1,13 @@
 {
-  "restrictions": {
-    "type": "!toplevelparent",
-    "message": "The 'send message' block may not be used in a 'configuration' event",
-    "types": [
-      "configuration"
-    ]
-  },
+  "restrictions": [
+    {
+      "type": "!toplevelparent",
+      "message": "The 'send message' block may not be used in a 'configuration' event",
+      "types": [
+        "configuration"
+      ]
+    }
+  ],
   "block": {
     "type": "send_message",
     "message0": "send message %1 to channel %2",

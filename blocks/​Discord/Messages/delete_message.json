@@ -1,11 +1,20 @@
 {
-  "restrictions": {
-    "type": "!toplevelparent",
-    "message": "The 'delete message' block may not be used in a 'configuration' event",
-    "types": [
-      "configuration"
-    ]
-  },
+  "restrictions": [
+    {
+      "type": "!toplevelparent",
+      "message": "The 'delete message' block may not be used in a 'configuration' event",
+      "types": [
+        "configuration"
+      ]
+    },
+    {
+      "type": "!parent",
+      "message": "The 'delete message' block may not be used in a 'run' block",
+      "types": [
+        "run"
+      ]
+    }
+  ],
   "block": {
     "type": "delete_message",
     "message0": "delete message %1",

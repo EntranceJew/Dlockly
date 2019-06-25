@@ -1,11 +1,13 @@
 {
-  "restrictions": {
-    "type": "!toplevelparent",
-    "message": "The 'delete message' block may not be used in a 'configuration' event",
-    "types": [
-      "configuration"
-    ]
-  },
+  "restrictions": [
+    {
+      "type": "!toplevelparent",
+      "message": "The 'get clean content of message' block may not be used in a 'configuration' event",
+      "types": [
+        "configuration"
+      ]
+    }
+  ],
   "block": {
     "type": "message_cleancontent",
     "message0": "get clean content of message %1",

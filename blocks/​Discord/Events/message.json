@@ -1,12 +1,14 @@
 {
-  "restrictions": {
-    "type": "toplevelparent",
-    "message": "The 'message' property may only be used in an 'on message' or 'on command' event",
-    "types": [
-      "on_message",
-      "on_command"
-    ]
-  },
+  "restrictions": [
+    {
+      "type": "toplevelparent",
+      "message": "The 'message' property may only be used in an 'on message' or 'on command' event",
+      "types": [
+        "on_message",
+        "on_command"
+      ]
+    }
+  ],
   "block": {
     "type": "message",
     "message0": "message",

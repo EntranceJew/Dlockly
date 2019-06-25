@@ -1,12 +1,14 @@
 {
   "max": 1,
-  "restrictions": {
-    "type": "toplevelparent",
-    "message": "The 'set prefix' block may only be used in a 'configuration' event",
-    "types": [
-      "configuration"
-    ]
-  },
+  "restrictions": [
+    {
+      "type": "toplevelparent",
+      "message": "The 'set prefix' block may only be used in a 'configuration' event",
+      "types": [
+        "configuration"
+      ]
+    }
+  ],
   "block": {
     "type": "set_prefix",
     "message0": "set prefix %1",
