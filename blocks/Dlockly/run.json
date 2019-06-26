@@ -29,7 +29,7 @@
       {
         "type": "field_variable",
         "name": "var",
-        "variable": "i"
+        "variable": null
       }
     ],
     "inputsInline": false,

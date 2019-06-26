@@ -15,5 +15,8 @@
     "colour": 45,
     "tooltip": "Modifies the configuration of the bot",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = '##### CONFIGURATION EVENT STARTS HERE #####\n' + Blockly.JavaScript.statementToCode(block, 'config');"
   }
 }
