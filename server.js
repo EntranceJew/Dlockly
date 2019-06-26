@@ -20,7 +20,7 @@ async function boot() {
 web.get('*', async (req, res) => {
   var path = req.path;
 
-  if (path.endsWith(".js") || path.endsWith(".css")) {
+  if (path.endsWith(".js") || path.endsWith(".css") || path.endsWith(".ico")) {
     console.log("Sending file '" + __dirname + path + "'");
     res.sendFile(__dirname + path);
   } else {
