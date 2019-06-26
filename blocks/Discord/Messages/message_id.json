@@ -18,7 +18,6 @@
         "check": "Message"
       }
     ],
-    "inputsInline": true,
     "output": [
       "Snowflake",
       "Number",
