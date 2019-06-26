@@ -21,7 +21,7 @@
     ],
     "previousStatement": null,
     "nextStatement": null,
-    "colour": 45,
+    "colour": 225,
     "tooltip": "Changes the prefix of the bot",
     "helpUrl": ""
   },

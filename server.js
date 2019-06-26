@@ -78,11 +78,13 @@ function initializeBlocksRecursively(p, categories) {
     if (json.icons) {
       var _icons = json.icons.reverse();
       for (var icon of _icons) {
+        if (!json.block.args0) json.block.args0 = [];
+
         json.block.args0.unshift({
           "type": "field_image",
-          "src": icons[icon].src,
-          "width": icons[icon].width,
-          "height": icons[icon].height,
+          "src": icons[icon],
+          "width": 15,
+          "height": 15,
           "alt": icon,
           "flipRtl": false
         });

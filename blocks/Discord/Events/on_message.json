@@ -1,4 +1,7 @@
 {
+  "icons": [
+    "event"
+  ],
   "max": 1,
   "block": {
     "type": "on_message",
@@ -13,7 +16,7 @@
       }
     ],
     "colour": 0,
-    "tooltip": "Triggers when a message is received",
+    "tooltip": "(Discord Event) Triggers when a message is received",
     "helpUrl": ""
   }
 }

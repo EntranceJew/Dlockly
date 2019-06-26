@@ -1,7 +1,10 @@
 {
+  "icons": [
+    "event"
+  ],
   "max": 1,
   "block": {
-    "type": "on_reload",
+    "type": "on_initialize",
     "message0": "on initialize %1 %2",
     "args0": [
       {
@@ -13,7 +16,7 @@
       }
     ],
     "colour": 0,
-    "tooltip": "Runs when the bot is restarted or when the script is reloaded",
+    "tooltip": "(Discord Event) Runs when the bot is restarted",
     "helpUrl": ""
   }
 }
