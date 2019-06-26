@@ -5,3 +5,5 @@ node_modules
 .env
 data
 .githubsync
+.glitch-assets
+shrinkwrap.yaml
