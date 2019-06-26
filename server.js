@@ -30,8 +30,7 @@ web.get('*', async (req, res) => {
       blocks,
       max,
       restrictions,
-      generators,
-      functions
+      generators
     } = initializeBlocksRecursively("./blocks/", categories);
 
     res.render("src/dlockly.ejs", {
@@ -40,8 +39,7 @@ web.get('*', async (req, res) => {
       categories: categories,
       restrictions: JSON.stringify(restrictions),
       xmlCategoryTree: generateXmlTreeRecursively(categories),
-      generators: JSON.stringify(generators),
-      functions: functions,
+      generators: generators
     });
   }
 });
@@ -63,8 +61,7 @@ function initializeBlocksRecursively(p, categories) {
   var blocks = [];
   var max = {};
   var restrictions = {};
-  var generators = {};
-  var functions = [];
+  var generators = [];
 
   var files = read(p).filter(f => f.endsWith(".json"));
 
@@ -89,10 +86,10 @@ function initializeBlocksRecursively(p, categories) {
     else console.warn("Category '" + desiredCategory + "' required for block '" + json.block.type + "' was not found.");
 
     if (json.generator) {
-      generators[json.block.type] = json.generator.code;
-      if (json.generator.functions) {
-        for (var func of functions) functions.push(func);
-      }
+      generators.push({
+        type: json.block.type,
+        generator: json.generator.code
+      });
     }
   }
 
@@ -100,8 +97,7 @@ function initializeBlocksRecursively(p, categories) {
     blocks: blocks,
     max: max,
     restrictions: restrictions,
-    generators: generators,
-    functions: functions,
+    generators: generators
   };
 }
 

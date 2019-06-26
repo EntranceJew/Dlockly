@@ -370,6 +370,14 @@
       };
     <% }); %>
 
+    <% generators.forEach(g => { %>
+      Blockly.JavaScript['<%= g.type %>'] = function(block) {
+        var _return;
+        eval(decode("<%= g.generator %>"));
+        return _return;
+      }
+    <% }); %>
+
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
     var workspace = Blockly.inject(blocklyDiv, {
