@@ -6,6 +6,15 @@
       "types": [
         "configuration"
       ]
+    },
+    {
+      "type": "custom",
+      "message": "The 'run' block must encapsulate exactly one statement",
+      "code": "if (block.getFirstStatementConnection().targetBlock()) _return = !block.getFirstStatementConnection().targetBlock().nextConnection.isConnected(); else _return =  true;"
+    },
+    {
+      "type": "custom",
+      "code": "_return = block.parentBlock_;"
     }
   ],
   "block": {
