@@ -1,5 +1,5 @@
 {
-  "name": "blockly",
+  "name": "dlockly",
   "version": "1.0.0",
   "description": "A fully customizable Discord bot with a Scratch-like interface!",
   "main": "server.js",
@@ -32,7 +32,7 @@
     "node": "8.x"
   },
   "repository": {
-    "url": "https://github.com/discordhackweek/blocklybot"
+    "url": "https://github.com/alexejheroytb/dlockly"
   },
   "devDependencies": {}
 }

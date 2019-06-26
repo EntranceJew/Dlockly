@@ -382,9 +382,16 @@
     var blocklyDiv = document.getElementById('blocklyDiv');
     var workspace = Blockly.inject(blocklyDiv, {
       maxInstances: JSON.parse(decode('<%= max %>')),
+      collapse: false,
+      comments: false,
+      grid: {
+        spacing: 20,
+        length: 1,
+        color: '#888'
+      },
       scrollbars: false,
       disable: false,
-      toolbox: document.getElementById('toolbox')
+      toolbox: document.getElementById('toolbox'),
     });
     document.workspace = workspace;
     var onresize = function(e) {
