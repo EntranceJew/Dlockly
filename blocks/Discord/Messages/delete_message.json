@@ -11,7 +11,8 @@
       "type": "!parent",
       "message": "The 'delete message' block may not be used in a 'run' block",
       "types": [
-        "run"
+        "run",
+        "run_2"
       ]
     }
   ],

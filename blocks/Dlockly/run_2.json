@@ -18,13 +18,12 @@
     }
   ],
   "block": {
-    "type": "run",
+    "type": "run_2",
     "message0": "run %1 and save output to variable %2",
     "args0": [
       {
-        "type": "input_statement",
-        "name": "NAME",
-        "check": "RunnableActionWithResult"
+        "type": "input_value",
+        "name": "NAME"
       },
       {
         "type": "field_variable",

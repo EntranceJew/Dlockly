@@ -1,0 +1,21 @@
+{
+  "icons": [
+    "async"
+  ],
+  "block": {
+    "type": "nexus_game",
+    "message0": "get game info %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "NAME",
+        "check": "String"
+      }
+    ],
+    "inputsInline": false,
+    "output": "NexusGame",
+    "colour": 38,
+    "tooltip": "(async) Gets information about a game from nexusmods.com",
+    "helpUrl": ""
+  }
+}

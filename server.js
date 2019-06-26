@@ -7,6 +7,8 @@ const read = require('fs-readdir-recursive');
 const uap = require('express-useragent');
 const path = require('path');
 
+const icons = require('./config/icons.json');
+
 var web = express();
 web.set("views", __dirname);
 web.use(uap.express());
@@ -73,6 +75,22 @@ function initializeBlocksRecursively(p, categories) {
     var splits = f.split(/[\/\\]+/g);
     var fileName = splits.pop();
 
+    if (json.icons) {
+      var _icons = json.icons.reverse();
+      for (var icon of _icons) {
+        json.block.args0.unshift({
+          "type": "field_image",
+          "src": icons[icon].src,
+          "width": icons[icon].width,
+          "height": icons[icon].height,
+          "alt": icon,
+          "flipRtl": false
+        });
+
+        json.block.message0 = bumpMessageNumbers(json.block.message0);
+      }
+    }
+
     blocks.push(json.block);
 
     if (json.max) max[json.block.type] = json.max;
@@ -125,6 +143,17 @@ function initializeCategoriesRecursively(p) {
   }
 
   return result;
+}
+
+function bumpMessageNumbers(message) {
+  var str = "%0 " + message;
+  var nr = str.match(/%\d+/g).length;
+
+  for (var i = nr - 1; i >= 0; i--) {
+    str = str.replace("%" + i, "%" + Number.parseInt(i + 1));
+  }
+
+  return str;
 }
 
 setInterval(() => {
