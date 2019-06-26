@@ -1,7 +1,8 @@
 {
-  "Dlockly": "https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2FIcon1.png?v=1561542756208",
+  "dlockly": "https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2FIcon1.png?v=1561542756208",
   "async": "https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2Fclock-vector-minimal-5.png?v=1561542954449",
-  "NexusGame": "https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2Fcontroller-icon-8.png?v=1561548553429",
-  "Message": "https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2FFilled%20Speech%20Bubble%20With%20Dots-595b40b85ba036ed117dc100.svg?v=1561549067958",
-  "event": "https://cdn.discordapp.com/emojis/324252365547110400.png?v=1"
+  "nexusgame": "https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2Fcontroller-icon-8.png?v=1561548553429",
+  "message": "https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2FFilled%20Speech%20Bubble%20With%20Dots-595b40b85ba036ed117dc100.svg?v=1561549067958",
+  "event": "https://cdn.discordapp.com/emojis/324252365547110400.png?v=1",
+  "nexus": "https://cdn.discordapp.com/avatars/458591118209187851/686314fcfa96fea3b0bd34b26182b05a.png?size=128"
 }

@@ -1,6 +1,6 @@
 {
   "icons": [
-    "Message"
+    "message"
   ],
   "restrictions": [
     {
@@ -19,5 +19,8 @@
     "colour": 0,
     "tooltip": "(type: Message) The message that was sent",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = 'message'"
   }
 }
