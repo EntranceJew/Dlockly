@@ -6,7 +6,10 @@ const fs = require('fs');
 const read = require('fs-readdir-recursive');
 const uap = require('express-useragent');
 const path = require('path');
+const querystring = require('querystring');
+const request = require('request-promise');
 
+const auth = require('./src/auth');
 const icons = require('./config/icons.json');
 
 var web = express();
@@ -14,19 +17,32 @@ web.set("views", __dirname);
 web.use(uap.express());
 const bot = new Discord.Client();
 
+var db = require('better-sqlite3')('data/db.db');
+
 async function boot() {
-  bot.login(process.env.DISCORD_TOKEN);
+  db.prepare("CREATE TABLE if not exists logindata (userid TEXT PRIMARY KEY, sessionkey TEXT, authkey TEXT);").run();
   web.listen(process.env.PORT);
+  bot.login(process.env.DISCORD_TOKEN);
 }
 
 web.get('*', async (req, res) => {
-  var path = req.path;
+  var {
+    authUserID,
+    authSession
+  } = auth.getCookies(req);
+  var authToken = auth.getToken(authUserID, db);
+  if (auth.sessionValid(authUserID, authSession, db)) var authUserData = await auth.getUserData(_auth_token);
 
-  if (path.endsWith(".js") || path.endsWith(".css") || path.endsWith(".ico")) {
-    console.log("Sending file '" + __dirname + path + "'");
-    res.sendFile(__dirname + path);
+  var p = req.path;
+
+  if (p.endsWith(".js") || p.endsWith(".css") || p.endsWith(".ico")) {
+    console.log("Sending file '" + __dirname + p + "'");
+    res.sendFile(__dirname + p);
+  } else if (p.match("^/auth/?$") || p.match("^/login/?$")) {
+    console.log("Attempted to access page '" + __dirname + p + "'. Evaluating code");
+    eval(bin2String(fs.readFileSync(path.join(__dirname, "/src/www/", p + ".js"))));
   } else {
-    console.log("Attempted to access file '" + __dirname + path + "'. Rendering main page instead");
+    console.log("Attempted to access file '" + __dirname + p + "'. Rendering main page instead");
     var categories = initializeCategoriesRecursively("./blocks/");
     var {
       blocks,
@@ -41,7 +57,7 @@ web.get('*', async (req, res) => {
       categories: categories,
       restrictions: JSON.stringify(restrictions),
       xmlCategoryTree: generateXmlTreeRecursively(categories),
-      generators: generators
+      generators: generators,
     });
   }
 });
@@ -156,6 +172,10 @@ function bumpMessageNumbers(message) {
   }
 
   return str;
+}
+
+function bin2String(array) {
+  return String.fromCharCode.apply(String, array);
 }
 
 setInterval(() => {
