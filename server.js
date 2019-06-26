@@ -20,19 +20,18 @@ async function boot() {
 web.get('*', async (req, res) => {
   var path = req.path;
 
-  if (path.endsWith(".js" || path.endsWith(".css")))
+  if (path.endsWith(".js") || path.endsWith(".css")) {
+    console.log("Sending file '" + __dirname + path + "'");
     res.sendFile(__dirname + path);
-  else {
-    var blocks = [];
-    var max = {};
-    var categories = [];
-    var restrictions = {};
-
+  } else {
+    console.log("Attempted to access file '" + __dirname + path + "'. Rendering main page instead");
     var categories = initializeCategoriesRecursively("./blocks/");
     var {
       blocks,
       max,
-      restrictions
+      restrictions,
+      generators,
+      functions
     } = initializeBlocksRecursively("./blocks/", categories);
 
     res.render("src/dlockly.ejs", {
@@ -41,6 +40,8 @@ web.get('*', async (req, res) => {
       categories: categories,
       restrictions: JSON.stringify(restrictions),
       xmlCategoryTree: generateXmlTreeRecursively(categories),
+      generators: JSON.stringify(generators),
+      functions: functions,
     });
   }
 });
@@ -62,6 +63,8 @@ function initializeBlocksRecursively(p, categories) {
   var blocks = [];
   var max = {};
   var restrictions = {};
+  var generators = {};
+  var functions = [];
 
   var files = read(p).filter(f => f.endsWith(".json"));
 
@@ -84,12 +87,21 @@ function initializeBlocksRecursively(p, categories) {
 
     if (desiredCategory) desiredCategory.blocks.push(json.block.type);
     else console.warn("Category '" + desiredCategory + "' required for block '" + json.block.type + "' was not found.");
+
+    if (json.generator) {
+      generators[json.block.type] = json.generator.code;
+      if (json.generator.functions) {
+        for (var func of functions) functions.push(func);
+      }
+    }
   }
 
   return {
     blocks: blocks,
     max: max,
     restrictions: restrictions,
+    generators: generators,
+    functions: functions,
   };
 }
 
