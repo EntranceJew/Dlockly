@@ -7,3 +7,5 @@ data
 .githubsync
 .glitch-assets
 shrinkwrap.yaml
+pull.sh
+push.sh
