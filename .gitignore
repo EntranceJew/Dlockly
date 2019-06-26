@@ -8,4 +8,6 @@ data
 .glitch-assets
 shrinkwrap.yaml
 pull.sh
+pull-f.sh
 push.sh
+push-f.sh
