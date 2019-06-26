@@ -2,8 +2,16 @@
   "max": 1,
   "block": {
     "type": "configuration",
-    "message0": "configuration %1 %2",
+    "message0": "%1 configuration %2 %3",
     "args0": [
+      {
+        "type": "field_image",
+        "src": "https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2FIcon1.png?v=1561542756208",
+        "width": 40,
+        "height": 40,
+        "alt": "Dlockly",
+        "flipRtl": false
+      },
       {
         "type": "input_dummy"
       },
