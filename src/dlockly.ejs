@@ -14,7 +14,27 @@
 </head>
 
 <body>
-  <div id="blocklyDiv" style="height: 480px; width: 600px"></div>
+  <table>
+    <tbody>
+      <tr><td>
+        <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
+          <a href="../index.html">Demos</a> &gt; Resizable Blockly (Part 2)</h1>
+
+        <p>
+          Once an <a href="index.html">area is defined</a>, Blockly can be
+          injected and positioned over the area.
+          A resize handler keeps it in position as the page changes.
+        </p>
+
+        <p>→ More info on <a href="https://developers.google.com/blockly/guides/configure/web/resizable">injecting resizable Blockly</a>…</p>
+      </td></tr>
+      <tr>
+        <td id="blocklyArea">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="blocklyDiv" style="position:absolute"></div>
 
   <xml id="toolbox" style="display: none">
     <category name="Logic" colour="210">
@@ -346,13 +366,34 @@
       };
     <% }); %>
 
-    var workspace = Blockly.inject('blocklyDiv', {
+    var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    var workspace = Blockly.inject(blocklyDiv, {
       maxInstances: JSON.parse(decode('<%= max %>')),
       scrollbars: false,
       disable: false,
       toolbox: document.getElementById('toolbox')
     });
     document.workspace = workspace;
+    var onresize = function(e) {
+      console.log("Resize!");
+      var element = blocklyArea;
+      var x = 0;
+      var y = 0;
+      do {
+        x += element.offsetLeft;
+        y += element.offsetTop;
+        element = element.offsetParent;
+      } while (element);
+      blocklyDiv.style.left = x + 'px';
+      blocklyDiv.style.top = y + 'px';
+      blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+      blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+      Blockly.svgResize(workspace);
+    };
+    window.addEventListener('resize', onresize, false);
+    onresize();
+    Blockly.svgResize(workspace);
 
     document.restrictions = JSON.parse(decode('<%= restrictions %>'));
 
