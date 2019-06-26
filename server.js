@@ -49,10 +49,10 @@ web.get('*', async (req, res) => {
 function generateXmlTreeRecursively(categories) {
   var result = "";
   for (var c of categories) {
-    result += "<category name='" + c.name + "' colour='" + c.color + "'>";
+    result += "<category name='" + c.name.replace(/_/g, "") + "' colour='" + c.color + "'>";
     result += generateXmlTreeRecursively(c.subcategories);
     for (var b of c.blocks) {
-      result += "<block type='" + b.replace(/_/g, "") + "'></block>";
+      result += "<block type='" + b + "'></block>";
     }
     result += "</category>"
   }
