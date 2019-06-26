@@ -31,5 +31,17 @@
     "colour": 0,
     "tooltip": "(Discord Event) Triggers when a command is received",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = 'set_prefix(\"' + block.getFieldValue('prefix') + '\");'",
+    "functions": [
+      {
+        "name": "set_prefix",
+        "parameters": [
+          "_prefix"
+        ],
+        "code": "bot.prefix = _prefix;"
+      }
+    ]
   }
 }
