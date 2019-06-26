@@ -1,4 +1,7 @@
 {
+  "icons": [
+    "event"
+  ],
   "restrictions": [
     {
       "type": "blockexists",
@@ -26,7 +29,7 @@
       }
     ],
     "colour": 0,
-    "tooltip": "Triggers when a command is received",
+    "tooltip": "(Discord Event) Triggers when a command is received",
     "helpUrl": ""
   }
 }

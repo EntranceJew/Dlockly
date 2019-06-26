@@ -1,4 +1,7 @@
 {
+  "icons": [
+    "Message"
+  ],
   "restrictions": [
     {
       "type": "toplevelparent",
@@ -14,7 +17,7 @@
     "message0": "message",
     "output": "Message",
     "colour": 0,
-    "tooltip": "The message that was sent",
+    "tooltip": "(type: Message) The message that was sent",
     "helpUrl": ""
   }
 }
