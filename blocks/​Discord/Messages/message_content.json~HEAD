@@ -1,0 +1,27 @@
+{
+  "restrictions": [
+    {
+      "type": "!toplevelparent",
+      "message": "The 'get content of message' block may not be used in a 'configuration' event",
+      "types": [
+        "configuration"
+      ]
+    }
+  ],
+  "block": {
+    "type": "message_content",
+    "message0": "get content of message %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "msg",
+        "check": "Message"
+      }
+    ],
+    "inputsInline": true,
+    "output": "String",
+    "colour": 90,
+    "tooltip": "Gets the content of a message",
+    "helpUrl": ""
+  }
+}
