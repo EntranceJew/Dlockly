@@ -1,8 +1,3 @@
-echo Pulling from GitHub....
-git fetch origin master
-git reset --hard origin/master
-git pull origin master --force
-echo Pull successful!
-echo Refreshing...
+GIT_SSH_COMMAND="ssh -i .githubsync/id_rsa" git fetch origin master
+GIT_SSH_COMMAND="ssh -i .githubsync/id_rsa" git pull origin master
 refresh
-echo Refresh done!
