@@ -31,7 +31,7 @@ web.get('*', async (req, res) => {
     authSession
   } = auth.getCookies(req);
   var authToken = auth.getToken(authUserID, db);
-  if (auth.sessionValid(authUserID, authSession, db)) var authUserData = await auth.getUserData(_auth_token);
+  var authUserData = auth.sessionValid(authUserID, authSession, db) ? await auth.getUserData(_auth_token) : undefined;
 
   var p = req.path;
 
@@ -40,7 +40,7 @@ web.get('*', async (req, res) => {
     res.sendFile(__dirname + p);
   } else if (p.match("^/auth/?$") || p.match("^/login/?$")) {
     console.log("Attempted to access page '" + __dirname + p + "'. Evaluating code");
-    eval(bin2String(fs.readFileSync(path.join(__dirname, "/src/www/", p + ".js"))));
+    eval(bin2String(fs.readFileSync(__dirname + "/src/www" + p + ".js")));
   } else {
     console.log("Attempted to access file '" + __dirname + p + "'. Rendering main page instead");
     var categories = initializeCategoriesRecursively("./blocks/");
@@ -175,6 +175,7 @@ function bumpMessageNumbers(message) {
 }
 
 function bin2String(array) {
+  if (typeof array == typeof "str") return array;
   return String.fromCharCode.apply(String, array);
 }
 
