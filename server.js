@@ -4,7 +4,6 @@ const express = require('express');
 const Discord = require('discord.js');
 const fs = require('fs');
 const read = require('fs-readdir-recursive');
-const uap = require('express-useragent');
 const path = require('path');
 const querystring = require('querystring');
 const request = require('request-promise');
@@ -14,7 +13,8 @@ const icons = require('./config/icons.json');
 
 var web = express();
 web.set("views", __dirname);
-web.use(uap.express());
+web.use(require('express-useragent').express());
+web.use(require('cookie-parser')());
 const bot = new Discord.Client();
 
 var db = require('better-sqlite3')('data/db.db');
@@ -31,18 +31,25 @@ web.get('*', async (req, res) => {
     authSession
   } = auth.getCookies(req);
   var authToken = auth.getToken(authUserID, db);
-  var authUserData = auth.sessionValid(authUserID, authSession, db) ? await auth.getUserData(_auth_token) : undefined;
+  var authUserData = auth.sessionValid(authUserID, authSession, db) ? await auth.getUserData(authToken) : undefined;
 
   var p = req.path;
 
-  if (p.endsWith(".js") || p.endsWith(".css") || p.endsWith(".ico")) {
+  if (p.endsWith(".js") || p.endsWith(".css") || p.endsWith(".ico") || p.endsWith(".html")) {
     console.log("Sending file '" + __dirname + p + "'");
     res.sendFile(__dirname + p);
   } else if (p.match("^/auth/?$") || p.match("^/login/?$")) {
     console.log("Attempted to access page '" + __dirname + p + "'. Evaluating code");
-    eval(bin2String(fs.readFileSync(__dirname + "/src/www" + p + ".js")));
+    eval(bin2String(fs.readFileSync(__dirname + "/src/get" + p + ".js")));
   } else {
+    if (!auth.sessionValid(authUserID, authSession, db)) {
+      console.log("Attempted to access file '" + __dirname + p + "' but was not logged in. Rendering login page");
+      res.sendFile(__dirname + "/src/notloggedin.html");
+      return;
+    }
+
     console.log("Attempted to access file '" + __dirname + p + "'. Rendering main page instead");
+
     var categories = initializeCategoriesRecursively("./blocks/");
     var {
       blocks,
