@@ -1,7 +1,4 @@
 {
-  "icons": [
-    "message"
-  ],
   "restrictions": [
     {
       "type": "toplevelparent",
