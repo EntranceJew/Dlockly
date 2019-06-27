@@ -1,8 +1,7 @@
 {
   "max": 1,
   "icons": [
-    "dlockly",
-    "event"
+    "dlockly"
   ],
   "block": {
     "type": "configuration",
