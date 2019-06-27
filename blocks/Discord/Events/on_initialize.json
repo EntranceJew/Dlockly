@@ -16,7 +16,10 @@
       }
     ],
     "colour": 0,
-    "tooltip": "(Discord Event) Runs when the bot is restarted",
+    "tooltip": "Runs when the bot is restarted",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = '\\\\n##### ready #####' + Blockly.JavaScript.statementToCode(block, 'code')"
   }
 }

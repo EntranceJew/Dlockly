@@ -10,11 +10,7 @@
     {
       "type": "custom",
       "message": "The 'run' block must encapsulate exactly one statement",
-      "code": "if (block.getFirstStatementConnection().targetBlock()) _return = !block.getFirstStatementConnection().targetBlock().nextConnection.isConnected(); else _return =  true;"
-    },
-    {
-      "type": "custom",
-      "code": "_return = block.parentBlock_;"
+      "code": "if (block.getFirstStatementConnection().isConnected()) _return = !block.getFirstStatementConnection().targetBlock().getNextBlock(); else _return = false;"
     }
   ],
   "block": {
@@ -37,5 +33,8 @@
     "colour": 330,
     "tooltip": "",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE) + ' = ' + Blockly.JavaScript.valueToCode(block, 'NAME')"
   }
 }

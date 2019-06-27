@@ -22,5 +22,8 @@
     "colour": 90,
     "tooltip": "Gets the channel of a message",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.channel', Blockly.JavaScript.ORDER_MEMBER]"
   }
 }

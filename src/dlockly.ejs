@@ -417,13 +417,12 @@
     document.restrictions = JSON.parse(decode('<%= restrictions %>'));
 
     workspace.addChangeListener(Blockly.Events.disableOrphans);
-    workspace.addChangeListener(disableUnapplicable);
 
-    setInterval(() => { disableUnapplicable({ type: Blockly.Events.MOVE, workspaceId: workspace.id, }); }, 1000);
+    setInterval(() => { disableUnapplicable({ type: Blockly.Events.MOVE, workspaceId: workspace.id, }); }, 100);
 
     if (cookieExists("xml")) Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(getCookie("xml")), workspace);
 
-    setInterval(() => { setCookie("xml", Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)), 30); })
+    setInterval(() => { setCookie("xml", Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))); }, 100);
   </script>
 </body>
 
