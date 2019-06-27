@@ -4,7 +4,7 @@ function disableUnapplicable(event) {
 
   for (var block of blocks) {
     if (!block) continue;
-    if (!document.restrictions[block.type]) continue;
+    if (!document.restrictions[block.type]) document.restrictions[block.type] = [];
 
     var messages = [];
     var issues = 0;
@@ -20,10 +20,8 @@ function disableUnapplicable(event) {
     }
 
     if (issues < 1) {
-      block.setDisabled(false);
       block.setWarningText(null);
     } else {
-      block.setDisabled(true);
       if (messages.length > 0)
         block.setWarningText(messages.join('\n'));
     }

@@ -16,7 +16,10 @@
       }
     ],
     "colour": 0,
-    "tooltip": "(Discord Event) Triggers when a message is received",
+    "tooltip": "Triggers when a message is received",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = '\\\\n##### message #####' + Blockly.JavaScript.statementToCode(block, 'code')"
   }
 }

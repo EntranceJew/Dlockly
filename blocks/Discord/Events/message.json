@@ -14,10 +14,10 @@
     "message0": "message",
     "output": "Message",
     "colour": 0,
-    "tooltip": "(type: Message) The message that was sent",
+    "tooltip": "The message that was sent",
     "helpUrl": ""
   },
   "generator": {
-    "code": "_return = 'message'"
+    "code": "_return = ['message', Blockly.JavaScript.ORDER_ATOMIC]"
   }
 }

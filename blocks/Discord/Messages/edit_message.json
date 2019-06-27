@@ -29,5 +29,8 @@
     "colour": 90,
     "tooltip": "Edits a message sent by the bot",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.edit(' + Blockly.JavaScript.valueToCode(block, 'new', Blockly.JavaScript.ORDER_ATOMIC); + ');'"
   }
 }
