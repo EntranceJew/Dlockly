@@ -4,7 +4,6 @@ function disableUnapplicable(event) {
 
   for (var block of blocks) {
     if (!block) continue;
-    if (block.disabled) continue;
     if (!document.restrictions[block.type]) continue;
 
     var messages = [];
