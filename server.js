@@ -36,19 +36,30 @@ web.get('*', async (req, res) => {
   var p = req.path;
 
   if (p.endsWith(".js") || p.endsWith(".css") || p.endsWith(".ico") || p.endsWith(".html")) {
-    console.log("Sending file '" + __dirname + p + "'");
     res.sendFile(__dirname + p);
-  } else if (p.match("^/auth/?$") || p.match("^/login/?$")) {
-    console.log("Attempted to access page '" + __dirname + p + "'. Evaluating code");
+  } else if (p.match("^/auth/?$") || p.match("^/login/?$") || p.match("^/logout/?$")) {
     eval(bin2String(fs.readFileSync(__dirname + "/src/get" + p + ".js")));
   } else {
     if (!auth.sessionValid(authUserID, authSession, db)) {
-      console.log("Attempted to access file '" + __dirname + p + "' but was not logged in. Rendering login page");
       res.sendFile(__dirname + "/src/notloggedin.html");
       return;
     }
 
-    console.log("Attempted to access file '" + __dirname + p + "'. Rendering main page instead");
+    var user = await getUser(authUserID);
+    if (!user) {
+      res.send('<h1>Unknown User</h1> Make sure that you have a common guild with the bot');
+      return;
+    }
+
+    if (!getGuild(req.query.guild)) {
+      var toSend = "<h1>Logged in as " + user.user.username + "#" + user.user.discriminator + "</h1><h2><a href='https://dlockly.glitch.me/logout'>Log out</a></h2><br><h2>Pick a server</h2><ul>";
+      for (var guild of getConfigurableGuilds(user)) {
+        toSend += "<li><a href='https://dlockly.glitch.me?guild=" + guild.id + "'>" + guild.name + "</a></li>";
+      }
+      toSend += "</ul>";
+      res.send(toSend);
+      return;
+    }
 
     var categories = initializeCategoriesRecursively("./blocks/");
     var {
@@ -68,6 +79,42 @@ web.get('*', async (req, res) => {
     });
   }
 });
+
+async function getUser(id) {
+  return (await getUsers())[id];
+}
+
+async function getUsers() {
+  var guilds = bot.guilds.array();
+  var result = {};
+
+  for (var guild of guilds) {
+    var _guild = await bot.guilds.get(guild.id).fetchMembers();
+
+    _guild.members.forEach((v, k) => result[k] = v);
+  }
+
+  return result;
+}
+
+function getGuild(id) {
+  return getGuilds().get(id);
+}
+
+function getConfigurableGuilds(_member) {
+  var guilds = getGuilds().array();
+  var user = _member.user;
+  var goodGuilds = [];
+  for (var guild of guilds) {
+    var member = guild.member(user);
+    if (member.hasPermission('MANAGE_GUILD')) goodGuilds.push(guild);
+  }
+  return goodGuilds;
+}
+
+function getGuilds() {
+  return bot.guilds;
+}
 
 function generateXmlTreeRecursively(categories) {
   var result = "";
@@ -126,7 +173,6 @@ function initializeBlocksRecursively(p, categories) {
     var desiredCategory = findCategoryRecursively(categories, desiredCategoryName);
 
     if (desiredCategory) desiredCategory.blocks.push(json.block.type);
-    else console.warn("Category '" + desiredCategory + "' required for block '" + json.block.type + "' was not found.");
 
     if (json.generator) {
       generators.push({
@@ -191,7 +237,7 @@ setInterval(() => {
 }, 280000);
 
 process.on('unhandledRejection', (reason, p) => {
-  console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+  console.log('Unhandled Rejection at: ', p, 'reason:', reason);
 });
 
 boot();
