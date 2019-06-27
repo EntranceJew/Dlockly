@@ -20,6 +20,6 @@
     "helpUrl": ""
   },
   "generator": {
-    "code": "_return = '\\n##### CONFIGURATION EVENT STARTS HERE #####' + Blockly.JavaScript.statementToCode(block, 'config')"
+    "code": "_return = '\\\\n##### configuration #####' + Blockly.JavaScript.statementToCode(block, 'config')"
   }
 }

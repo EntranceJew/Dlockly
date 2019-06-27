@@ -18,5 +18,8 @@
     "colour": 45,
     "tooltip": "(Dlockly Event) Runs when the script is saved/reloaded",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = '\\\\n##### reload #####' + Blockly.JavaScript.statementToCode(block, 'init')"
   }
 }

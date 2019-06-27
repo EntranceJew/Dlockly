@@ -11,10 +11,6 @@
       "type": "custom",
       "message": "The 'run' block must encapsulate exactly one statement",
       "code": "if (block.getFirstStatementConnection().isConnected()) _return = !block.getFirstStatementConnection().targetBlock().getNextBlock(); else _return = false;"
-    },
-    {
-      "type": "custom",
-      "code": "_return = block.parentBlock_;"
     }
   ],
   "block": {
@@ -23,7 +19,7 @@
     "args0": [
       {
         "type": "input_statement",
-        "name": "NAME",
+        "name": "stuffToRun",
         "check": "RunnableActionWithResult"
       },
       {
@@ -38,5 +34,8 @@
     "colour": 330,
     "tooltip": "",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE) + ' = ' + Blockly.JavaScript.statementToCode(block, 'stuffToRun')"
   }
 }
