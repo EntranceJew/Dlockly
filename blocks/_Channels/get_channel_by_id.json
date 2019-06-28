@@ -25,6 +25,6 @@
     "helpUrl": ""
   },
   "generator": {
-    "code": "_return = ['guild.channels.get(' + Blockly.JavaScript.valueToCode(block, 'id', Blockly.JavaScript.ORDER_ATOMIC) + ');', Blockly.JavaScript.ORDER_FUNCTION_CALL]"
+    "code": "_return = ['guild.channels.get(' + Blockly.JavaScript.valueToCode(block, 'id', Blockly.JavaScript.ORDER_ATOMIC) + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL]"
   }
 }
