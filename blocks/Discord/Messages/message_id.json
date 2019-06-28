@@ -33,5 +33,8 @@
     "colour": 90,
     "tooltip": "Gets the id of a message",
     "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.id', Blockly.JavaScript.ORDER_MEMBER]"
   }
 }

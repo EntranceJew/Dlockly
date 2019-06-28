@@ -330,24 +330,25 @@ for (var event in events) {
     var check = events[event].check;
     var guild = events[event].guildGetter;
 
-    console.log("Added event for " + event);
-
-    eval(`bot.on('${event}', (${parameters.join(",")}) => {
-          if (!${check}) return;
-          console.log("Check passed!");
-          var guild = ${guild}.id;
-          console.log("Guild is " + guild);
-          if (fs.existsSync(__dirname + "/data/" + guild + "/config.json")) {
-            console.log("Exists!");
-            var json = fs.readFileSync(__dirname + "/data/" + guild + "/config.json");
-            var obj = JSON.parse(json);
-      
-            console.log(obj);
-
-            if (obj.${event}) eval(obj.${event});
-          }
-        });`)
+    try {
+      eval(`bot.on('${event}', (${parameters.join(",")}) => {
+        if (!(${check})) return;
+        var guild = ${guild}.id;
+        if (fs.existsSync(__dirname + "/data/" + guild + "/config.json")) {
+          var json = fs.readFileSync(__dirname + "/data/" + guild + "/config.json");
+          var obj = JSON.parse(json);
+          
+          if (obj.${event}) eval(obj.${event});
+        }
+      });`)
+    } catch (e) {
+      console.exception(e);
+    }
   }
 }
+
+bot.on("ready", () => {
+  bot.user.setActivity("with blocks. https://dlockly.glitch.me");
+})
 
 boot();
