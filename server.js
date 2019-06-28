@@ -5,8 +5,6 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const read = require('fs-readdir-recursive');
 const path = require('path');
-const querystring = require('querystring');
-const request = require('request-promise');
 
 const auth = require('./src/auth');
 const icons = require('./config/icons.json');
@@ -37,7 +35,7 @@ web.get('*', async (req, res) => {
 
   if (p.endsWith(".js") || p.endsWith(".css") || p.endsWith(".ico") || p.endsWith(".html")) {
     res.sendFile(__dirname + p);
-  } else if (p.match("^/auth/?$") || p.match("^/login/?$") || p.match("^/logout/?$")) {
+  } else if (p.match("^/auth/?$") || p.match("^/login/?$") || p.match("^/logout/?$") || p.match("^/save/?$")) {
     eval(bin2String(fs.readFileSync(__dirname + "/src/get" + p + ".js")));
   } else {
     if (!auth.sessionValid(authUserID, authSession, db)) {
@@ -52,9 +50,9 @@ web.get('*', async (req, res) => {
     }
 
     if (!getGuild(req.query.guild)) {
-      var toSend = "<h1>Logged in as " + user.user.username + "#" + user.user.discriminator + "</h1><h2><a href='https://dlockly.glitch.me/logout'>Log out</a></h2><br><h2>Pick a server</h2><ul>";
+      var toSend = "<h1>Logged in as " + user.user.username + "#" + user.user.discriminator + "</h1><h2><a href='logout'>Log out</a></h2><br><h2>Pick a server</h2><ul>";
       for (var guild of getConfigurableGuilds(user)) {
-        toSend += "<li><a href='https://dlockly.glitch.me?guild=" + guild.id + "'>" + guild.name + "</a></li>";
+        toSend += "<li><a href='/?guild=" + guild.id + "'>" + guild.name + "</a></li>";
       }
       toSend += "</ul>";
       res.send(toSend);
