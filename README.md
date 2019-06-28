@@ -6,14 +6,10 @@
 
 ---
 
-#### Introducing Dlockly, _A fully customizable Discord bot with a Scratch-like interface!_
+### Introducing Dlockly, _A fully customizable Discord bot with a Scratch-like interface!_
 
-_(This bot does not do anything until you configure it)_
-
----
-
-### You can invite the bot [here](https://discordapp.com/oauth2/authorize?client_id=591694201230721043&scope=bot&permissions=8)
-### You can configure the bot [here](https://dlockly.glitch.me)
+#### You can invite the bot [here](https://discordapp.com/oauth2/authorize?client_id=591694201230721043&scope=bot&permissions=8)
+#### You can configure the bot [here](https://dlockly.glitch.me)
 
 ---
 
