@@ -7,41 +7,8 @@
 ---
 
 #### Introducing Dlockly, _A fully customizable Discord bot with a Scratch-like interface!_
-(I totally did not just copy that from the repo topic)
 
-### Anyway!
-
-You may be wondering what exactly it does.
-
-Well let me tell you, it does **NOTHING!**
-
-Like, I'm not kidding. It literally does nothing **UNTIL YOU CONFIGURE IT!**
-
-### I'm guessing that you want to know how to configure it!
-
-_uh, not rea-_
-
-### WELL LET ME TELL YOU!
-
----
-
-#### Do you know what Scratch is?
-
-_uh, no_
-
-#### oof, i figured that. Thankfully I know how to use Google:
-
-##### _Scratch is a block-based visual programming language and online community targeted primarily at children. Users of the site can create online projects using a block-like interface. The service is developed by the MIT Media Lab, has been translated into 70+ languages, and is used in most parts of the world._
-
-#### Basically, Dlockly is configurable using a Scratch-like interface
-
-_what is Scratch?_
-
-#### I JUST TOLD YOU WHAT SCRATCH WAS! READ PLEASE!
-
-_ok i read it. what now?_
-
-### Nothing, that's all.
+_(This bot does not do anything until you configure it)_
 
 ---
 
