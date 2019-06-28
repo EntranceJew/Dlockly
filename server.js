@@ -121,6 +121,7 @@ function getConfigurableGuilds(_member) {
   var goodGuilds = [];
   for (var guild of guilds) {
     var member = guild.member(user);
+    if (!member) continue;
     if (member.hasPermission('MANAGE_GUILD')) goodGuilds.push(guild);
   }
   return goodGuilds;
