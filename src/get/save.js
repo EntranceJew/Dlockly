@@ -8,7 +8,7 @@ fs.writeFileSync(__dirname + "/data/" + req.query.guild + "/bot.txt", req.query.
   flag: "w"
 });
 
-var regex = RegExp("(?:^|\\n)##### (.*?) #####([\\s\\S]*?)(?=(?:$|#####))", "g");
+var regex = RegExp("##### (.*?) #####([\\s\\S]*?)(?=(?:$|#####))", "g");
 var matches = require('match-all')(req.query.js, regex);
 var obj = {};
 
