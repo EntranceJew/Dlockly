@@ -21,8 +21,7 @@ while (match) {
 
 var varRegex = RegExp("^var.*(?=(?:$|\\n))", "g");
 var match = req.query.js.match(varRegex);
-
-obj.var = match[0];
+if (match && match[0]) obj.var = match[0];
 
 fs.writeFileSync(__dirname + "/data/" + req.query.guild + "/config.json", JSON.stringify(obj), {
   flag: "w"

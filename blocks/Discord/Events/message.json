@@ -2,7 +2,7 @@
   "restrictions": [
     {
       "type": "toplevelparent",
-      "message": "The 'message' property may only be used in an 'on message' or 'on command' event",
+      "message": "The 'message' property may only be used in an 'on message' event",
       "types": [
         "on_message",
         "on_command"
