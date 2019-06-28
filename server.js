@@ -419,9 +419,9 @@ bot.on("ready", () => {
       try {
         eval(`bot.on('${event}', (${parameters.join(",")}) => {
           if (!(${check})) return;
-          var guild = ${guild}.id;
-          if (fs.existsSync(__dirname + "/data/" + guild + "/config.json")) {
-            var json = fs.readFileSync(__dirname + "/data/" + guild + "/config.json");
+          var guild = ${guild};
+          if (fs.existsSync(__dirname + "/data/" + guild.id + "/config.json")) {
+            var json = fs.readFileSync(__dirname + "/data/" + guild.id + "/config.json");
             var obj = JSON.parse(json);
             if (obj.var) eval(obj.var);
             if (obj.${event}) eval(obj.${event});

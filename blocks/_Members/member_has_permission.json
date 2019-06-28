@@ -145,6 +145,6 @@
     "helpUrl": ""
   },
   "generator": {
-    "code": "_return = Blockly.JavaScript.valueToCode(block, 'member', Blockly.JavaScript.ORDER_ATOMIC) + '.hasPermission(block.getFieldValue('perm'));'"
+    "code": "_return = Blockly.JavaScript.valueToCode(block, 'member', Blockly.JavaScript.ORDER_ATOMIC) + '.hasPermission(' + block.getFieldValue('perm') + ');'"
   }
 }
