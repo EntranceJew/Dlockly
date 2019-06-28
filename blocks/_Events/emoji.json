@@ -1,0 +1,23 @@
+{
+  "restrictions": [
+    {
+      "type": "toplevelparent",
+      "message": "The 'emoji' property may only be used in an 'on emoji added' or 'on emoji deleted' event",
+      "types": [
+        "on_emoji_create",
+        "on_emoji_delete"
+      ]
+    }
+  ],
+  "block": {
+    "type": "emoji",
+    "message0": "emoji",
+    "output": "Emoji",
+    "colour": 0,
+    "tooltip": "The emoji that triggered the event",
+    "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = ['emoji', Blockly.JavaScript.ORDER_ATOMIC]"
+  }
+}

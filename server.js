@@ -407,31 +407,31 @@ var events = {
   }
 }
 
-for (var event in events) {
-  if (events.hasOwnProperty(event)) {
-    var parameters = events[event].parameters;
-    var check = events[event].check;
-    var guild = events[event].guildGetter;
-
-    try {
-      eval(`bot.on('${event}', (${parameters.join(",")}) => {
-        if (!(${check})) return;
-        var guild = ${guild}.id;
-        if (fs.existsSync(__dirname + "/data/" + guild + "/config.json")) {
-          var json = fs.readFileSync(__dirname + "/data/" + guild + "/config.json");
-          var obj = JSON.parse(json);
-          if (obj.var) eval(obj.var);
-          if (obj.${event}) eval(obj.${event});
-        }
-      });`)
-    } catch (e) {
-      console.exception(e);
-    }
-  }
-}
-
 bot.on("ready", () => {
   bot.user.setActivity("with blocks. https://dlockly.glitch.me");
+
+  for (var event in events) {
+    if (events.hasOwnProperty(event)) {
+      var parameters = events[event].parameters;
+      var check = events[event].check;
+      var guild = events[event].guildGetter;
+
+      try {
+        eval(`bot.on('${event}', (${parameters.join(",")}) => {
+          if (!(${check})) return;
+          var guild = ${guild};
+          if (fs.existsSync(__dirname + "/data/" + guild.id + "/config.json")) {
+            var json = fs.readFileSync(__dirname + "/data/" + guild.id + "/config.json");
+            var obj = JSON.parse(json);
+            if (obj.var) eval(obj.var);
+            if (obj.${event}) eval(obj.${event});
+          }
+        });`)
+      } catch (e) {
+        console.exception(e);
+      }
+    }
+  }
 })
 
 boot();

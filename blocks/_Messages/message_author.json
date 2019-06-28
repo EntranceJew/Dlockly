@@ -9,8 +9,8 @@
     }
   ],
   "block": {
-    "type": "message_id",
-    "message0": "get id of message %1",
+    "type": "message_author",
+    "message0": "get author of message %1",
     "args0": [
       {
         "type": "input_value",
@@ -18,16 +18,12 @@
         "check": "Message"
       }
     ],
-    "output": [
-      "Snowflake",
-      "Number",
-      "String"
-    ],
+    "output": "Member",
     "colour": 90,
-    "tooltip": "Gets the id of a message",
+    "tooltip": "Gets the author of a message",
     "helpUrl": ""
   },
   "generator": {
-    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.id', Blockly.JavaScript.ORDER_MEMBER]"
+    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.member', Blockly.JavaScript.ORDER_MEMBER]"
   }
 }
