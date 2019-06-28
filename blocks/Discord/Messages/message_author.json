@@ -24,6 +24,6 @@
     "helpUrl": ""
   },
   "generator": {
-    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.author', Blockly.JavaScript.ORDER_MEMBER]"
+    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.member', Blockly.JavaScript.ORDER_MEMBER]"
   }
 }
