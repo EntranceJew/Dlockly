@@ -38,7 +38,10 @@ try {
         res.redirect("/");
       }).catch(e => {
         console.error(e);
-        res.redirect("/login");
+        if (e.response && e.response.body)
+          res.send(e.response.body);
+        else
+          res.redirect("/login");
       });
     }
   }
