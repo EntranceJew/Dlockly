@@ -6,6 +6,13 @@
       "types": [
         "configuration"
       ]
+    },
+    {
+      "type": "notempty",
+      "message": "You must provide a value for the 'message' parameter",
+      "types": [
+        "msg"
+      ]
     }
   ],
   "block": {
