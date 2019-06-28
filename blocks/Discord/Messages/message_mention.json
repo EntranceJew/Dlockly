@@ -17,8 +17,8 @@
         "name": "type",
         "options": [
           [
-            "user",
-            "users"
+            "member",
+            "members"
           ],
           [
             "role",
@@ -44,7 +44,7 @@
       }
     ],
     "output": [
-      "User",
+      "Member",
       "Role",
       "Channel"
     ],
