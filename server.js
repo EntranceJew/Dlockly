@@ -74,9 +74,25 @@ web.get('*', async (req, res) => {
       restrictions: JSON.stringify(restrictions),
       xmlCategoryTree: generateXmlTreeRecursively(categories),
       generators: generators,
+      blocklyXml: getBlocklyXml(req.query.guild),
     });
   }
 });
+
+function getBlocklyXml(id) {
+  if (!fs.existsSync(__dirname + "/data/")) {
+    fs.mkdirSync(__dirname + "/data/");
+    return '';
+  }
+  if (!fs.existsSync(__dirname + "/data/" + id)) {
+    fs.mkdirSync(__dirname + "/data/" + id);
+    return '';
+  }
+  if (!fs.existsSync(__dirname + "/data/" + id + "/blockly.xml")) {
+    return '';
+  }
+  return fs.readFileSync(__dirname + "/data/" + id + "/blockly.xml");
+}
 
 async function getUser(id) {
   return (await getUsers())[id];

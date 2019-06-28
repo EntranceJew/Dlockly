@@ -411,9 +411,7 @@
 
     setInterval(() => { disableUnapplicable({ type: Blockly.Events.MOVE, workspaceId: workspace.id, }); }, 100);
 
-    if (cookieExists("xml")) Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(getCookie("xml")), workspace);
-
-    setInterval(() => { setCookie("xml", Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))); }, 100);
+    if (decode('<%= blocklyXml %>').length > 0) Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(decode("<%= blocklyXml %>")), workspace);
 
     function saveConfig() {
       var code = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace));
