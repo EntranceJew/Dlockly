@@ -261,4 +261,96 @@ process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at: ', p, 'reason:', reason);
 });
 
+var events = {
+  "channelCreate": {
+    "parameters": ["channel"],
+    "check": "channel.guild",
+    "guildGetter": "channel.guild"
+  },
+  "channelDelete": {
+    "parameters": ["channel"],
+    "check": "channel.guild",
+    "guildGetter": "channel.guild"
+  },
+  "emojiCreate": {
+    "parameters": ["emoji"],
+    "check": "emoji.guild",
+    "guildGetter": "emoji.guild"
+  },
+  "emojiDelete": {
+    "parameters": ["emoji"],
+    "check": "emoji.guild",
+    "guildGetter": "emoji.guild"
+  },
+  "guildBanAdd": {
+    "parameters": ["guild", "user"],
+    "check": "guild",
+    "guildGetter": "guild"
+  },
+  "guildBanRemove": {
+    "parameters": ["guild", "user"],
+    "check": "guild",
+    "guildGetter": "guild"
+  },
+  "guildMemberAdd": {
+    "parameters": ["member"],
+    "check": "member.guild",
+    "guildGetter": "member.guild"
+  },
+  "guildMemberRemove": {
+    "parameters": ["member"],
+    "check": "member.guild",
+    "guildGetter": "member.guild"
+  },
+  "message": {
+    "parameters": ["message"],
+    "check": "message.guild",
+    "guildGetter": "message.guild"
+  },
+  "messageDelete": {
+    "parameters": ["message"],
+    "check": "message.guild",
+    "guildGetter": "message.guild"
+  },
+  "roleCreate": {
+    "parameters": ["role"],
+    "check": "role.guild",
+    "guildGetter": "role.guild"
+  },
+  "roleDelete": {
+    "parameters": ["role"],
+    "check": "role.guild",
+    "guildGetter": "role.guild"
+  }
+}
+
+for (const event in events) {
+  if (events.hasOwnProperty(event)) {
+    const parameters = events[event];
+
+    eval(`bot.on('${event}', (${parameters.join(",")}) => { 
+      if (fs.existsSync(__dirname + "/data/" + ))`)
+  }
+}
+
+bot.on('ready', () => {
+  var isDirectory = source => fs.lstatSync(source).isDirectory();
+  var dirs = fs.readdirSync(__dirname + "/data/").map(name => path.join(__dirname, "/data/", name)).filter(isDirectory);
+
+  for (var dir of dirs) {
+    if (fs.existsSync(path.join(dir, "/config.json"))) {
+      var json = fs.readFileSync(path.join(dir, "/config.json"));
+      var obj = JSON.parse(json);
+
+      var splits = dir.split(/[\/\\]+/g);
+      var guild;
+      do {
+        guild = splits.pop()
+      } while (!guild || guild.length < 1);
+
+      if (obj.ready) eval(obj.ready)
+    }
+  }
+});
+
 boot();
