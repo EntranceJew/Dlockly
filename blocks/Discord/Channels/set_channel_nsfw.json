@@ -30,6 +30,6 @@
     "helpUrl": ""
   },
   "generator": {
-    "code": "_return = Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.setNSFW(' + (block.getFieldValue('val') == 'TRUE') + ') '"
+    "code": "_return = Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.setNSFW(' + (block.getFieldValue('val') == 'TRUE') + ');'"
   }
 }
