@@ -42,5 +42,6 @@ try {
     }
   }
 } catch (e) {
+  console.exception(e);
   res.redirect("/login");
 }
