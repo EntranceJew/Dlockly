@@ -164,6 +164,7 @@ web.get('*', async (req, res) => {
       xmlCategoryTree: generateXmlTreeRecursively(categories),
       generators: generators,
       blocklyXml: getBlocklyXml(req.query.guild),
+      exampleXml: getExampleXml(),
     });
   }
 });
@@ -181,6 +182,10 @@ function getBlocklyXml(id) {
     return '';
   }
   return fs.readFileSync(__dirname + "/data/" + id + "/blockly.xml");
+}
+
+function getExampleXml() {
+  return fs.readFileSync(__dirname + "/config/example.xml");
 }
 
 async function getUser(id) {

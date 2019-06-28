@@ -461,6 +461,11 @@
       window.onbeforeunload = null;
       window.location.reload(false);
     }
+
+    function loadExample() {
+      document.workspace.clear();
+      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(decode("<%= exampleXml %>")), workspace);
+    }
   </script>
 </body>
 
