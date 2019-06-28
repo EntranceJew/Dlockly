@@ -4,8 +4,7 @@
       "type": "toplevelparent",
       "message": "The 'message' property may only be used in an 'on message' event",
       "types": [
-        "on_message",
-        "on_command"
+        "on_message"
       ]
     }
   ],
