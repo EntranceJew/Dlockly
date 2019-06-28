@@ -1,0 +1,23 @@
+{
+  "restrictions": [
+    {
+      "type": "toplevelparent",
+      "message": "The 'channel' property may only be used in an 'on channel created' or 'on channel deleted' event",
+      "types": [
+        "on_channel_create",
+        "on_channel_delete"
+      ]
+    }
+  ],
+  "block": {
+    "type": "channel",
+    "message0": "channel",
+    "output": "Channel",
+    "colour": 0,
+    "tooltip": "The channel that triggered the event",
+    "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = ['channel', Blockly.JavaScript.ORDER_ATOMIC]"
+  }
+}

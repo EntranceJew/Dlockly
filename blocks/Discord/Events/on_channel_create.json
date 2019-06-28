@@ -1,0 +1,25 @@
+{
+  "icons": [
+    "event"
+  ],
+  "max": 1,
+  "block": {
+    "type": "on_channel_create",
+    "message0": "on channel created %1 %2",
+    "args0": [
+      {
+        "type": "input_dummy"
+      },
+      {
+        "type": "input_statement",
+        "name": "code"
+      }
+    ],
+    "colour": 0,
+    "tooltip": "Triggers when a channel is received",
+    "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = '\\\\n##### channelCreate #####' + Blockly.JavaScript.statementToCode(block, 'code')"
+  }
+}
