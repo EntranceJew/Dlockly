@@ -6,6 +6,14 @@
       "types": [
         "configuration"
       ]
+    },
+    {
+      "type": "notempty",
+      "message": "You must provide a value for the 'message' and 'channel' parameters",
+      "types": [
+        "msg",
+        "channel"
+      ]
     }
   ],
   "block": {

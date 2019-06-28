@@ -43,6 +43,10 @@ function validateRestriction(block, blocks, res) {
         return (blocks.filter(b => res.types.includes(b.type) && !b.disabled).length > 0) != reverse;
       case "parent":
         return (res.types.includes(block.getParent().type)) != reverse;
+      case "notempty":
+        for (var t of res.types)
+          if (!block.getInput(t).connection.targetBlock()) return false;
+        return true;
       default:
         return true;
     }
@@ -65,6 +69,7 @@ function validateConfiguration(block, res) {
     case "!parent":
       return block.getParent() && !block.getParent().disabled;
     case "custom":
+    case "notempty":
       return true;
     default:
       return false;

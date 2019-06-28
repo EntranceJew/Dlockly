@@ -2,13 +2,22 @@
   "icons": [
     "async"
   ],
+  "restrictions": [
+    {
+      "type": "notempty",
+      "message": "You must provide a value for the 'game' parameter",
+      "types": [
+        "gdomain"
+      ]
+    }
+  ],
   "block": {
     "type": "nexus_game",
     "message0": "get game info %1",
     "args0": [
       {
         "type": "input_value",
-        "name": "NAME",
+        "name": "gdomain",
         "check": "String"
       }
     ],
