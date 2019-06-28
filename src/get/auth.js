@@ -37,6 +37,7 @@ try {
 
         res.redirect("/");
       }).catch(e => {
+        console.exception(e);
         res.redirect("/login");
       });
     }
