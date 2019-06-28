@@ -13,12 +13,10 @@
     "message0": "delete %1 message(s) from channel %2",
     "args0": [
       {
-        "type": "field_number",
+        "type": "input_value",
         "name": "num",
-        "value": 1,
-        "min": 1,
-        "max": 50,
-        "precision": 1
+        "check": "Number",
+        "align": "RIGHT"
       },
       {
         "type": "input_value",
@@ -26,6 +24,7 @@
         "check": "Channel"
       }
     ],
+    "inputsInline": false,
     "previousStatement": null,
     "nextStatement": null,
     "colour": 270,
@@ -33,6 +32,6 @@
     "helpUrl": ""
   },
   "generator": {
-    "code": "_return = Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.bulkDelete(' + block.getFieldValue('num') + ');'"
+    "code": "_return = Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.bulkDelete(' + 'Number.parseInt(Number.parseInt(' + Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC) + ') + 1));'"
   }
 }

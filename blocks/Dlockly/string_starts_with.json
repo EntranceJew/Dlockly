@@ -1,12 +1,23 @@
 {
+  "restrictions": [
+    {
+      "type": "notempty",
+      "message": "You must provide a value for the 'string one' and 'string two' parameters",
+      "types": [
+        "s_one",
+        "s_two"
+      ]
+    }
+  ],
   "block": {
     "type": "string_starts_with",
-    "message0": "%1 starts with %2",
+    "message0": "string %1 starts with %2",
     "args0": [
       {
         "type": "input_value",
         "name": "s_one",
-        "check": "String"
+        "check": "String",
+        "align": "RIGHT"
       },
       {
         "type": "input_value",
@@ -14,7 +25,7 @@
         "check": "String"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "output": "Boolean",
     "colour": 330,
     "tooltip": "Checks if a string starts with another string",
