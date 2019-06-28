@@ -26,6 +26,17 @@ function disableUnapplicable(event) {
         block.setWarningText(messages.join('\n'));
     }
   }
+
+  for (var block of blocks) {
+    if (block.warning && !block.disabled) {
+      document.getElementById("save").setAttribute("title", "Cannot save if there are errors!");
+      document.getElementById("save").setAttribute("disabled", "true");
+      return;
+    }
+  }
+
+  document.getElementById("save").removeAttribute("title");
+  document.getElementById("save").removeAttribute("disabled");
 };
 
 function validateRestriction(block, blocks, res) {
