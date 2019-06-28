@@ -3,7 +3,7 @@
     {
       "type": "custom",
       "message": "The 'run' block must encapsulate exactly one statement",
-      "code": "if (Blockly.JavaScript.valueToCode(block, 'NAME')) _return = !block.getFirstStatementConnection().targetBlock().getNextBlock(); else _return = false;"
+      "code": "_return = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_NONE)"
     }
   ],
   "block": {
@@ -12,7 +12,8 @@
     "args0": [
       {
         "type": "input_value",
-        "name": "NAME"
+        "name": "NAME",
+        "align": "RIGHT"
       },
       {
         "type": "field_variable",

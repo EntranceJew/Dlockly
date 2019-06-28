@@ -10,7 +10,7 @@
   ],
   "block": {
     "type": "set_channel_topic",
-    "message0": "set text channel %1 topic to %2",
+    "message0": "set text channel topic %1 to %2",
     "args0": [
       {
         "type": "input_value",
