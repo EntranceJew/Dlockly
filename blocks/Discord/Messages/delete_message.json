@@ -33,6 +33,6 @@
     "helpUrl": ""
   },
   "generator": {
-    "code": "_return = Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.delete()'"
+    "code": "_return = Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.delete() '"
   }
 }
