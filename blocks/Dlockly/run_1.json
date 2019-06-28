@@ -1,20 +1,13 @@
 {
   "restrictions": [
     {
-      "type": "!toplevelparent",
-      "message": "The 'run' block may not be used in a 'configuration' event",
-      "types": [
-        "configuration"
-      ]
-    },
-    {
       "type": "custom",
       "message": "The 'run' block must encapsulate exactly one statement",
       "code": "if (block.getFirstStatementConnection().isConnected()) _return = !block.getFirstStatementConnection().targetBlock().getNextBlock(); else _return = false;"
     }
   ],
   "block": {
-    "type": "run",
+    "type": "run_1",
     "message0": "run %1 and save output to variable %2",
     "args0": [
       {

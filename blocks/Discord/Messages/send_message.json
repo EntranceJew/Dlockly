@@ -1,13 +1,6 @@
 {
   "restrictions": [
     {
-      "type": "!toplevelparent",
-      "message": "The 'send message' block may not be used in a 'configuration' event",
-      "types": [
-        "configuration"
-      ]
-    },
-    {
       "type": "notempty",
       "message": "You must provide a value for the 'message' and 'channel' parameters",
       "types": [
