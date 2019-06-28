@@ -8,4 +8,6 @@ fs.writeFileSync(__dirname + "/data/" + req.query.guild + "/bot.txt", req.query.
   flag: "w"
 });
 
+
+
 res.redirect("/?guild=" + req.query.guild);
