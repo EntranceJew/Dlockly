@@ -22,6 +22,8 @@
     <tbody>
       <tr><td>
         <button id="save" onclick="saveConfig()" style="font-size:20px;height:37px">Save Configuration</button>
+        <button id="reset" onclick="resetConfig()" style="font-size:20px;height:37px">Reset Changes</button>
+        <button onclick="loadExample()" style="font-size:20px;height:37px; float:right;">Load Example</button>
       </td></tr>
       <tr>
         <td id="blocklyArea">
@@ -387,7 +389,6 @@
     });
     document.workspace = workspace;
     var onresize = function(e) {
-      console.log("Resize!");
       var element = blocklyArea;
       var x = 0;
       var y = 0;
@@ -410,13 +411,41 @@
 
     workspace.addChangeListener(Blockly.Events.disableOrphans);
 
-    setInterval(() => { disableUnapplicable({ type: Blockly.Events.MOVE, workspaceId: workspace.id, }); }, 100);
-
     if (decode('<%= blocklyXml %>').length > 0) Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(decode("<%= blocklyXml %>")), workspace);
+
+    setInterval(() => { 
+      disableUnapplicable({ 
+        type: Blockly.Events.MOVE, 
+        workspaceId: workspace.id, 
+      });
+
+      var saveNeedsDisabling = false;
+
+      if (decode("<%= blocklyXml %>") == Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))) {
+        document.getElementById("save").setAttribute("title", "You haven't made any changes!");
+        document.getElementById("save").setAttribute("disabled", "true");
+        document.getElementById("reset").setAttribute("title", "You haven't made any changes!");
+        document.getElementById("reset").setAttribute("disabled", "true");
+        saveNeedsDisabling = true;
+      }
+      
+      for (var block of workspace.getAllBlocks(false)) {
+        if (block.warning && !block.disabled) {
+          document.getElementById("save").setAttribute("title", "Cannot save if there are errors!");
+          document.getElementById("save").setAttribute("disabled", "true");
+          return;
+        }
+      }
+      if (!saveNeedsDisabling) {
+        document.getElementById("save").removeAttribute("title");
+        document.getElementById("save").removeAttribute("disabled");
+      }
+    }, 100);
 
     function saveConfig() {
       var code = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace));
       window.location = "/save?guild=" + getUrlParameter('guild') + "&xml=" + encodeURIComponent(code) + "&js=" + encodeURIComponent(Blockly.JavaScript.workspaceToCode());
+      window.onbeforeunload = null;
     }
 
     function getUrlParameter(name) {
@@ -424,6 +453,11 @@
       var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
       var results = regex.exec(location.search);
       return results ? decodeURIComponent(results[1].replace(/\+/g, ' ')) : '';
+    }
+
+    function resetConfig() {
+      window.onbeforeunload = null;
+      window.location.reload(false);
     }
   </script>
 </body>
