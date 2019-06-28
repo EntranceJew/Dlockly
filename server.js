@@ -130,9 +130,10 @@ web.get('*', async (req, res) => {
         </style>
         <h1>Logged in as "${user.user.username}#${user.user.discriminator}"</h1>
         <a href='logout'><button>Log out</button></a><br>
-        <h2>Pick a server</h2><ul>`;
+      `;
       var configurableGuilds = getConfigurableGuilds(user);
       if (configurableGuilds && configurableGuilds[0]) {
+        toSend += "<h2>Pick a server</h2><ul>"
         for (var guild of configurableGuilds) {
           toSend += "<li><a href='/?guild=" + guild.id + "'>" + guild.name + "</a></li>";
         }
