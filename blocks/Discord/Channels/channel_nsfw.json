@@ -1,0 +1,29 @@
+{
+  "restrictions": [
+    {
+      "type": "notempty",
+      "message": "You must provide a value for the 'message' parameter",
+      "types": [
+        "channel"
+      ]
+    }
+  ],
+  "block": {
+    "type": "channel_nsfw",
+    "message0": "is text channel nsfw %1",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "channel",
+        "check": "Channel"
+      }
+    ],
+    "output": "Boolean",
+    "colour": 270,
+    "tooltip": "Checks if a channel is marked as NSFW or not. Only available for text channels",
+    "helpUrl": ""
+  },
+  "generator": {
+    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.nsfw', Blockly.JavaScript.ORDER_MEMBER]"
+  }
+}
