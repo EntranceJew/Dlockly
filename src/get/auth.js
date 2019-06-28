@@ -37,12 +37,12 @@ try {
 
         res.redirect("/");
       }).catch(e => {
-        console.exception(e);
+        console.error(e);
         res.redirect("/login");
       });
     }
   }
 } catch (e) {
-  console.exception(e);
+  console.error(e);
   res.redirect("/login");
 }
