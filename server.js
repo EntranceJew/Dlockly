@@ -304,7 +304,7 @@ var events = {
   },
   "message": {
     "parameters": ["message"],
-    "check": "message.guild",
+    "check": "message.guild && !message.author.bot",
     "guildGetter": "message.guild"
   },
   "messageDelete": {
@@ -324,33 +324,30 @@ var events = {
   }
 }
 
-for (const event in events) {
+for (var event in events) {
   if (events.hasOwnProperty(event)) {
-    const parameters = events[event];
+    var parameters = events[event].parameters;
+    var check = events[event].check;
+    var guild = events[event].guildGetter;
 
-    eval(`bot.on('${event}', (${parameters.join(",")}) => { 
-      if (fs.existsSync(__dirname + "/data/" + ))`)
+    console.log("Added event for " + event);
+
+    eval(`bot.on('${event}', (${parameters.join(",")}) => {
+          if (!${check}) return;
+          console.log("Check passed!");
+          var guild = ${guild}.id;
+          console.log("Guild is " + guild);
+          if (fs.existsSync(__dirname + "/data/" + guild + "/config.json")) {
+            console.log("Exists!");
+            var json = fs.readFileSync(__dirname + "/data/" + guild + "/config.json");
+            var obj = JSON.parse(json);
+      
+            console.log(obj);
+
+            if (obj.${event}) eval(obj.${event});
+          }
+        });`)
   }
 }
-
-bot.on('ready', () => {
-  var isDirectory = source => fs.lstatSync(source).isDirectory();
-  var dirs = fs.readdirSync(__dirname + "/data/").map(name => path.join(__dirname, "/data/", name)).filter(isDirectory);
-
-  for (var dir of dirs) {
-    if (fs.existsSync(path.join(dir, "/config.json"))) {
-      var json = fs.readFileSync(path.join(dir, "/config.json"));
-      var obj = JSON.parse(json);
-
-      var splits = dir.split(/[\/\\]+/g);
-      var guild;
-      do {
-        guild = splits.pop()
-      } while (!guild || guild.length < 1);
-
-      if (obj.ready) eval(obj.ready)
-    }
-  }
-});
 
 boot();
