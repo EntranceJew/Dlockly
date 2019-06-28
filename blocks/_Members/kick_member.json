@@ -1,14 +1,6 @@
 {
   "restrictions": [
     {
-      "type": "!parent",
-      "message": "The 'kick member' block may not be used in a 'run' block",
-      "types": [
-        "run_1",
-        "run_2"
-      ]
-    },
-    {
       "type": "notempty",
       "message": "You must provide a value for the 'member' parameter",
       "types": [
