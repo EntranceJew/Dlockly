@@ -21,16 +21,7 @@
   <table>
     <tbody>
       <tr><td>
-        <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
-          <a href="../index.html">Demos</a> &gt; Resizable Blockly (Part 2)</h1>
-
-        <p>
-          Once an <a href="index.html">area is defined</a>, Blockly can be
-          injected and positioned over the area.
-          A resize handler keeps it in position as the page changes.
-        </p>
-
-        <p>→ More info on <a href="https://developers.google.com/blockly/guides/configure/web/resizable">injecting resizable Blockly</a>…</p>
+        <button onclick="saveConfig()">Save Configuration</button>
       </td></tr>
       <tr>
         <td id="blocklyArea">
@@ -423,6 +414,18 @@
     if (cookieExists("xml")) Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(getCookie("xml")), workspace);
 
     setInterval(() => { setCookie("xml", Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))); }, 100);
+
+    function saveConfig() {
+      var code = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace));
+      window.location = "/save?guild=" + getUrlParameter('guild') + "&xml=" + encodeURIComponent(code) + "&js=" + encodeURIComponent(Blockly.JavaScript.workspaceToCode());
+    }
+
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results ? decodeURIComponent(results[1].replace(/\+/g, ' ')) : '';
+    }
   </script>
 </body>
 
