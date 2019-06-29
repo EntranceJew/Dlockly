@@ -1,10 +1,9 @@
 try {
   var toReturn = false;
-  if (!auth.sessionValid(req.cookies.auth_userid, req.cookies.auth_sessionvalid, db)) {
+  if (!auth.sessionValid(req.cookies.auth_userid, req.cookies.auth_session, db)) {
     res.redirect("/");
     toReturn = true;
   }
-  var user = getUser(req.cookies.auth_userid);
   if (!user) {
     res.redirect("/");
     toReturn = true;

@@ -25,6 +25,12 @@ async function boot() {
   db.prepare("CREATE TABLE if not exists logindata (userid TEXT PRIMARY KEY, sessionkey TEXT, authkey TEXT);").run();
   web.listen(process.env.PORT);
   bot.login(process.env.DISCORD_TOKEN);
+  
+  /*
+  try
+  {console.log(bot.guilds.get('480887043069706247').name);
+  } catch (e) {console.error(e);}
+  //*/
 }
 
 web.all('*', async (req, res) => {
@@ -51,7 +57,8 @@ web.all('*', async (req, res) => {
   } = auth.getCookies(req);
   var authToken = auth.getToken(authUserID, db);
   var authUserData = auth.sessionValid(authUserID, authSession, db) ? await auth.getUserData(authToken) : undefined;
-
+  var user = await getUser(authUserID);
+  
   var p = req.path;
 
   if (p.endsWith(".js") || p.endsWith(".css") || p.endsWith(".ico") || p.endsWith(".html")) {
@@ -91,7 +98,6 @@ web.all('*', async (req, res) => {
       return;
     }
 
-    var user = await getUser(authUserID);
     if (!user) {
       res.send(`
         <link href="https://fonts.googleapis.com/css?family=Days+One&display=swap" rel="stylesheet">
