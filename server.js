@@ -366,6 +366,14 @@ process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at: ', p, 'reason:', reason);
 });
 
+bot.on('error', (e) => {
+  console.error(e);
+})
+
+bot.on('warn', (w) => {
+  console.warn(w);
+});
+
 var events = {
   "channelCreate": {
     "parameters": ["channel"],
