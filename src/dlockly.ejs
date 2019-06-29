@@ -21,7 +21,12 @@
   <table>
     <tbody>
       <tr><td>
-        <button id="save" onclick="saveConfig()" style="font-size:20px;height:37px">Save Configuration</button>
+        <form action="/save" method="post" onsubmit="saveConfig()">
+        <input type="hidden" name="guild" id="inputGuild" required>
+        <input type="hidden" name="xml" id="inputXml" required>
+        <input type="hidden" name="js" id="inputJs" required>
+        <input type="hidden" name="check" value="check">
+        <input type="submit" id="save" style="font-size:20px;height:37px" value="Save Configuration">
         <button id="reset" onclick="resetConfig()" style="font-size:20px;height:37px">Reset Changes</button>
         <button onclick="loadExample()" style="font-size:20px;height:37px; float:right;">Load Example</button>
       </td></tr>
@@ -445,7 +450,9 @@
 
     function saveConfig() {
       var code = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace));
-      window.location = "/save?guild=" + getUrlParameter('guild') + "&xml=" + encodeURIComponent(code) + "&js=" + encodeURIComponent(Blockly.JavaScript.workspaceToCode());
+      document.getElementById("inputGuild").setAttribute("value", getUrlParameter("guild"));
+      document.getElementById("inputXml").setAttribute("value", encodeURIComponent(code));
+      document.getElementById("inputJs").setAttribute("value", encodeURIComponent(Blockly.JavaScript.workspaceToCode()));
       window.onbeforeunload = null;
     }
 
