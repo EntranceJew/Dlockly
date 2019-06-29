@@ -13,6 +13,10 @@ var web = express();
 web.set("views", __dirname);
 web.use(require('express-useragent').express());
 web.use(require('cookie-parser')());
+web.use(require('body-parser').json());
+web.use(require('body-parser').urlencoded({
+  extended: false
+}));
 const bot = new Discord.Client();
 
 var db = require('better-sqlite3')('data/db.db');
@@ -23,7 +27,7 @@ async function boot() {
   bot.login(process.env.DISCORD_TOKEN);
 }
 
-web.get('*', async (req, res) => {
+web.all('*', async (req, res) => {
   var browser = req.useragent.browser;
   if (browser != "Chrome" && browser != "Firefox") {
     res.send(`

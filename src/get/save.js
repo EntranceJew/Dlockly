@@ -1,16 +1,16 @@
 try {
   if (!fs.existsSync(__dirname + "/data/")) fs.mkdirSync(__dirname + "/data/");
-  if (!fs.existsSync(__dirname + "/data/" + req.query.guild)) fs.mkdirSync(__dirname + "/data/" + req.query.guild);
+  if (!fs.existsSync(__dirname + "/data/" + req.body.guild)) fs.mkdirSync(__dirname + "/data/" + req.body.guild);
 
-  fs.writeFileSync(__dirname + "/data/" + req.query.guild + "/blockly.xml", req.query.xml, {
+  fs.writeFileSync(__dirname + "/data/" + req.body.guild + "/blockly.xml", decodeURIComponent(req.body.xml), {
     flag: "w"
   });
-  fs.writeFileSync(__dirname + "/data/" + req.query.guild + "/bot.txt", req.query.js, {
+  fs.writeFileSync(__dirname + "/data/" + req.body.guild + "/bot.txt", decodeURIComponent(req.body.js), {
     flag: "w"
   });
 
   var regex = RegExp("##### (.*?) #####([\\s\\S]*?)(?=(?:$|#####))", "g");
-  var matches = require('match-all')(req.query.js, regex);
+  var matches = require('match-all')(decodeURIComponent(req.body.js), regex);
   var obj = {};
 
   match = matches.nextRaw();
@@ -21,15 +21,15 @@ try {
   }
 
   var varRegex = RegExp("^var.*(?=(?:$|\\n))", "g");
-  var match = req.query.js.match(varRegex);
+  var match = decodeURIComponent(req.body.js).match(varRegex);
   if (match && match[0]) obj.var = match[0];
 
-  fs.writeFileSync(__dirname + "/data/" + req.query.guild + "/config.json", JSON.stringify(obj), {
+  fs.writeFileSync(__dirname + "/data/" + req.body.guild + "/config.json", JSON.stringify(obj), {
     flag: "w"
   });
 
-  res.redirect("/?guild=" + req.query.guild);
+  res.redirect("/?guild=" + req.body.guild);
 } catch (e) {
   console.error(e);
-  res.redirect("/?guild=" + req.query.guild);
+  res.redirect("/?guild=" + req.body.guild);
 }
