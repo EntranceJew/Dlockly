@@ -1,4 +1,10 @@
 try {
+  if (!auth.sessionValid(req.cookies.auth_userid, req.cookies.auth_sessionvalid, db)) return res.redirect("/");
+  var user = getUser(req.cookies.auth_userid);
+  if (!user) return res.redirect("/");
+  var guilds = getConfigurableGuilds(user).map(g => g.id);
+  if (!guilds.includes(req.body.guild)) res.redirect("/");
+
   if (!fs.existsSync(__dirname + "/data/")) fs.mkdirSync(__dirname + "/data/");
   if (!fs.existsSync(__dirname + "/data/" + req.body.guild)) fs.mkdirSync(__dirname + "/data/" + req.body.guild);
 
