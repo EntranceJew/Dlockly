@@ -13,8 +13,8 @@
 
 ---
 
-Made for Discord Hack Week 2019.
+### Made for Discord Hack Week 2019.
 
-Category: Productivity
+Category: **Productivity**
 
 Made by: `Aci#0123`, `AlexejheroYTB#1636`, `Kylinator25#7900`, `nes#3391`, `Pickysaurus#1677`
