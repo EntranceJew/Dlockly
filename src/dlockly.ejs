@@ -28,7 +28,7 @@
           <input type="hidden" name="check" value="check">
           <input type="submit" id="save" style="font-size:20px;height:37px" value="Save Configuration">
           <button type="button" id="reset" onclick="resetConfig()" style="font-size:20px;height:37px">Reset Changes</button>
-          <button type="button" onclick="loadExample()" style="font-size:20px;height:37px; float:right;">Load Example</button>
+          <button type="button" id="example" onclick="loadExample()" style="font-size:20px;height:37px; float:right;">Load Example</button>
         </form>
       </td></tr>
       <tr>
@@ -390,6 +390,8 @@
         color: '#888'
       },
       disable: false,
+      scrollbars: true,
+      readOnly: <%= readOnly %>,
       toolbox: document.getElementById('toolbox'),
     });
     document.workspace = workspace;
@@ -424,28 +426,43 @@
         workspaceId: workspace.id, 
       });
 
-      var saveNeedsDisabling = false;
-
-      if (decode("<%= blocklyXml %>") == Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))) {
-        document.getElementById("save").setAttribute("title", "You haven't made any changes!");
-        document.getElementById("save").setAttribute("disabled", "true");
-        document.getElementById("reset").setAttribute("title", "You haven't made any changes!");
-        document.getElementById("reset").setAttribute("disabled", "true");
-        saveNeedsDisabling = true;
-      }
-      
-      for (var block of workspace.getAllBlocks(false)) {
-        if (block.warning && !block.disabled) {
-          document.getElementById("save").setAttribute("title", "Cannot save if there are errors!");
+      if (!<%= readOnly %>) {
+        var saveNeedsDisabling = false;
+        if (decode("<%= blocklyXml %>") == Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))) {
+          document.getElementById("save").setAttribute("title", "You haven't made any changes!");
           document.getElementById("save").setAttribute("disabled", "true");
-          return;
+          document.getElementById("reset").setAttribute("title", "You haven't made any changes!");
+          document.getElementById("reset").setAttribute("disabled", "true");
+          saveNeedsDisabling = true;
         }
-      }
-      if (!saveNeedsDisabling) {
-        document.getElementById("save").removeAttribute("title");
-        document.getElementById("save").removeAttribute("disabled");        
-        document.getElementById("reset").removeAttribute("title");
-        document.getElementById("reset").removeAttribute("disabled");
+        for (var block of workspace.getAllBlocks(false)) {
+          if (block.warning && !block.disabled) {
+            document.getElementById("save").setAttribute("title", "Cannot save if there are errors!");
+            document.getElementById("save").setAttribute("disabled", "true");
+            return;
+          }
+        }
+        if (!saveNeedsDisabling) {
+          document.getElementById("save").removeAttribute("title");
+          document.getElementById("save").removeAttribute("disabled");        
+          document.getElementById("reset").removeAttribute("title");
+          document.getElementById("reset").removeAttribute("disabled");
+        }
+
+        if (decode("<%= exampleXml %>") == Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))) {
+          document.getElementById("example").setAttribute("title", "The example is already loaded!");
+          document.getElementById("example").setAttribute("disabled", "true");
+        } else {
+          document.getElementById("example").removeAttribute("title");
+          document.getElementById("example").removeAttribute("disabled");
+        }
+      } else {
+          document.getElementById("save").setAttribute("title", "You do not have permission to edit this configuration!");
+          document.getElementById("save").setAttribute("disabled", "true");
+          document.getElementById("reset").setAttribute("title", "You do not have permission to edit this configuration!");
+          document.getElementById("reset").setAttribute("disabled", "true");
+          document.getElementById("example").setAttribute("title", "You do not have permission to edit this configuration!");
+          document.getElementById("example").setAttribute("disabled", "true");
       }
     }, 100);
 

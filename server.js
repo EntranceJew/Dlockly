@@ -135,9 +135,9 @@ web.all('*', async (req, res) => {
         <h1>Logged in as "${user.user.username}#${user.user.discriminator}"</h1>
         <a href='logout'><button>Log out</button></a><br>
       `;
-      var configurableGuilds = getConfigurableGuilds(user);
+      var configurableGuilds = getGuildsMemberIsIn(user);
       if (configurableGuilds && configurableGuilds[0]) {
-        toSend += "<h2>Pick a server</h2><ul>"
+        toSend += "<h2>Pick a server to view/edit it's configuration</h2><ul>"
         for (var guild of configurableGuilds) {
           toSend += "<li><a href='/?guild=" + guild.id + "'>" + guild.name + "</a></li>";
         }
@@ -169,6 +169,7 @@ web.all('*', async (req, res) => {
       generators: generators,
       blocklyXml: getBlocklyXml(req.query.guild),
       exampleXml: getExampleXml(),
+      readOnly: !getConfigurableGuilds(user).map(g => g.id).includes(req.query.guild),
     });
   }
 });
@@ -221,6 +222,18 @@ function getConfigurableGuilds(_member) {
     var member = guild.member(user);
     if (!member) continue;
     if (member.hasPermission('MANAGE_GUILD')) goodGuilds.push(guild);
+  }
+  return goodGuilds;
+}
+
+function getGuildsMemberIsIn(_member) {
+  var guilds = getGuilds().array();
+  var user = _member.user;
+  var goodGuilds = [];
+  for (var guild of guilds) {
+    var member = guild.member(user);
+    if (!member) continue;
+    goodGuilds.push(guild);
   }
   return goodGuilds;
 }
