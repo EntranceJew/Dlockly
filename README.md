@@ -1,7 +1,6 @@
-# The bot has been temporarily disabled due to an exploit!
+### **The bot has been temporarily disabled due to an exploit!**
 
 ---
-
 
 ## Dlockly, _a fully customizable Discord bot with a Scratch-like interface!_
 
@@ -12,7 +11,7 @@ _Put those long-trained block placing skills to use and make a bot of your own!_
 
 ---
 
-### Discord Hack Week 2019 - Productivity - 1st place
+### Discord Hack Week 2019 Winner (Productivity)
 
 <img src="https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2FIcon1.png?v=1561542756208" width="100px" height="100px"> 
 
@@ -21,3 +20,4 @@ _Put those long-trained block placing skills to use and make a bot of your own!_
 ###### Looking to make your own bot using Blockly? Check out [7coil/discord-blocks](https://github.com/7coil/discord-blocks) or [camden7306/Discord-Blocks](https://github.com/camden7306/Discord-Blocks)
 
 _© 2019 AlexejheroYTB_
+
