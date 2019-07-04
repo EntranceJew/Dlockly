@@ -1,3 +1,8 @@
+# The bot has been temporarily disabled due to an exploit!
+
+---
+
+
 ## Dlockly, _a fully customizable Discord bot with a Scratch-like interface!_
 
 _Put those long-trained block placing skills to use and make a bot of your own!_
