@@ -24,16 +24,32 @@ var db = require('better-sqlite3')('data/db.db');
 async function boot() {
   db.prepare("CREATE TABLE if not exists logindata (userid TEXT PRIMARY KEY, sessionkey TEXT, authkey TEXT);").run();
   web.listen(process.env.PORT);
-  bot.login(process.env.DISCORD_TOKEN);
-  
-  /*
-  try
-  {console.log(bot.guilds.get('480887043069706247').name);
-  } catch (e) {console.error(e);}
-  //*/
+  //bot.login(process.env.DISCORD_TOKEN);
 }
 
 web.all('*', async (req, res) => {
+  res.send(`
+    <style>
+      a {
+        position: fixed;
+        left: calc(50% - 330.5px);
+        top: calc(50% - 183.5px);
+        font-size: 40px;
+        width: 536px;
+        height: 96px;
+        font-style: normal;
+        font-weight: bold;
+        color: #000;
+        text-decoration: none;
+        font-family: 'Days One', sans-serif;
+      }
+    </style>
+    <div>
+      <a id="navbar-editor" target="_top"><img src="https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2Fmaintenance.png?v=1562233741948"></a>
+    </div>
+    `)
+  return;
+
   var browser = req.useragent.browser;
   if (browser != "Chrome" && browser != "Firefox") {
     res.send(`
@@ -58,7 +74,7 @@ web.all('*', async (req, res) => {
   var authToken = auth.getToken(authUserID, db);
   var authUserData = auth.sessionValid(authUserID, authSession, db) ? await auth.getUserData(authToken) : undefined;
   var user = await getUser(authUserID);
-  
+
   var p = req.path;
 
   if (p.endsWith(".js") || p.endsWith(".css") || p.endsWith(".ico") || p.endsWith(".html")) {
