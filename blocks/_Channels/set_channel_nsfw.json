@@ -29,7 +29,5 @@
     "tooltip": "Marks a channel as SFW/NSFW. Only available for text channels",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.setNSFW(' + (block.getFieldValue('val') == 'TRUE') + ');'"
-  }
+  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.setNSFW(' + (block.getFieldValue('val') == 'TRUE') + ');'"
 }

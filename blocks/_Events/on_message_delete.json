@@ -19,7 +19,5 @@
     "tooltip": "Triggers when a message is deleted",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = '\\\\n##### messageDelete #####' + Blockly.JavaScript.statementToCode(block, 'code')"
-  }
+  "generator": "_return = '\\\\n##### messageDelete #####' + Blockly.JavaScript.statementToCode(block, 'code')"
 }

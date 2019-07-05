@@ -23,7 +23,5 @@
     "tooltip": "Gets the username of a member",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'member', Blockly.JavaScript.ORDER_ATOMIC) + '.user.username', Blockly.JavaScript.ORDER_MEMBER]"
-  }
+  "generator": "_return = [Blockly.JavaScript.valueToCode(block, 'member', Blockly.JavaScript.ORDER_ATOMIC) + '.user.username', Blockly.JavaScript.ORDER_MEMBER]"
 }

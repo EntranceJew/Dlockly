@@ -7,7 +7,5 @@
     "tooltip": "Creates a new line in the string. Equivalent to \\n",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = ['\\\\'\\\\\\\\n\\\\'', Blockly.JavaScript.ORDER_ATOMIC]"
-  }
+  "generator": "_return = ['\\\\'\\\\\\\\n\\\\'', Blockly.JavaScript.ORDER_ATOMIC]"
 }

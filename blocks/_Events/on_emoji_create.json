@@ -19,7 +19,5 @@
     "tooltip": "Triggers when an emoji is added",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = '\\\\n##### emojiCreate #####' + Blockly.JavaScript.statementToCode(block, 'code')"
-  }
+  "generator": "_return = '\\\\n##### emojiCreate #####' + Blockly.JavaScript.statementToCode(block, 'code')"
 }

@@ -23,7 +23,5 @@
     "tooltip": "Gets the name of a channel",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.name', Blockly.JavaScript.ORDER_MEMBER]"
-  }
+  "generator": "_return = [Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.name', Blockly.JavaScript.ORDER_MEMBER]"
 }

@@ -23,7 +23,5 @@
     "tooltip": "Checks if a channel is marked as NSFW or not. Only available for text channels",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.nsfw', Blockly.JavaScript.ORDER_MEMBER]"
-  }
+  "generator": "_return = [Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.nsfw', Blockly.JavaScript.ORDER_MEMBER]"
 }

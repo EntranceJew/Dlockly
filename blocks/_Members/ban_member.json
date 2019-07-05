@@ -24,7 +24,5 @@
     "tooltip": "Bans a member",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = Blockly.JavaScript.valueToCode(block, 'member', Blockly.JavaScript.ORDER_ATOMIC) + '.ban();'"
-  }
+  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'member', Blockly.JavaScript.ORDER_ATOMIC) + '.ban();'"
 }

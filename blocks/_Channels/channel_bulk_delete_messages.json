@@ -31,7 +31,5 @@
     "tooltip": "Deletes a number of messages from a channel",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.bulkDelete(' + 'Number.parseInt(Number.parseInt(' + Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC) + ') + 1));'"
-  }
+  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.bulkDelete(' + 'Number.parseInt(Number.parseInt(' + Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC) + ') + 1));'"
 }

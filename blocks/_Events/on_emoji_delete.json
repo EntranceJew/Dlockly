@@ -19,7 +19,5 @@
     "tooltip": "Triggers when an emoji is deleted",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = '\\\\n##### emojiDelete #####' + Blockly.JavaScript.statementToCode(block, 'code')"
-  }
+  "generator": "_return = '\\\\n##### emojiDelete #####' + Blockly.JavaScript.statementToCode(block, 'code')"
 }

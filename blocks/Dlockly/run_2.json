@@ -28,7 +28,5 @@
     "tooltip": "",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE) + ' = ' + Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC) + ';'"
-  }
+  "generator": "_return = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('var'), Blockly.Variables.NAME_TYPE) + ' = ' + Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC) + ';'"
 }

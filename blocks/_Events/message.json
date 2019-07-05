@@ -17,7 +17,5 @@
     "tooltip": "The message that triggered the event",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = ['message', Blockly.JavaScript.ORDER_ATOMIC]"
-  }
+  "generator": "_return = ['message', Blockly.JavaScript.ORDER_ATOMIC]"
 }

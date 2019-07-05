@@ -24,7 +24,5 @@
     "tooltip": "Deletes a message",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.delete();'"
-  }
+  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.delete();'"
 }

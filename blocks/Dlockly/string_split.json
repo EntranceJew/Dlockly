@@ -40,7 +40,5 @@
     "tooltip": "Splits a string and returns a split from it",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'str', Blockly.JavaScript.ORDER_ATOMIC) + '.split(' + Blockly.JavaScript.valueToCode(block, 'by', Blockly.JavaScript.ORDER_ATOMIC) + ')[' + Number.parseInt(Number.parseInt(block.getFieldValue('nr')) - 1) + ']', Blockly.JavaScript.ORDER_MEMBER]"
-  }
+  "generator": "_return = [Blockly.JavaScript.valueToCode(block, 'str', Blockly.JavaScript.ORDER_ATOMIC) + '.split(' + Blockly.JavaScript.valueToCode(block, 'by', Blockly.JavaScript.ORDER_ATOMIC) + ')[' + Number.parseInt(Number.parseInt(block.getFieldValue('nr')) - 1) + ']', Blockly.JavaScript.ORDER_MEMBER]"
 }

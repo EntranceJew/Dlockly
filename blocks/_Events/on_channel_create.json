@@ -19,7 +19,5 @@
     "tooltip": "Triggers when a channel is received",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = '\\\\n##### channelCreate #####' + Blockly.JavaScript.statementToCode(block, 'code')"
-  }
+  "generator": "_return = '\\\\n##### channelCreate #####' + Blockly.JavaScript.statementToCode(block, 'code')"
 }

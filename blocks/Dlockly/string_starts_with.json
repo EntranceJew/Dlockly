@@ -31,7 +31,5 @@
     "tooltip": "Checks if a string starts with another string",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = [Blockly.JavaScript.valueToCode(block, 's_one', Blockly.JavaScript.ORDER_ATOMIC) + '.startsWith(' + Blockly.JavaScript.valueToCode(block, 's_two', Blockly.JavaScript.ORDER_ATOMIC) + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL]"
-  }
+  "generator": "_return = [Blockly.JavaScript.valueToCode(block, 's_one', Blockly.JavaScript.ORDER_ATOMIC) + '.startsWith(' + Blockly.JavaScript.valueToCode(block, 's_two', Blockly.JavaScript.ORDER_ATOMIC) + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL]"
 }

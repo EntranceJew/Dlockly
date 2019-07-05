@@ -52,7 +52,5 @@
     "tooltip": "Gets a mention from a message",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = [Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.mentions.' + block.getFieldValue('type') + '.array()[' + Number.parseInt(Number.parseInt(block.getFieldValue('nr')) - 1) + ']', Blockly.JavaScript.ORDER_MEMBER]"
-  }
+  "generator": "_return = [Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.mentions.' + block.getFieldValue('type') + '.array()[' + Number.parseInt(Number.parseInt(block.getFieldValue('nr')) - 1) + ']', Blockly.JavaScript.ORDER_MEMBER]"
 }

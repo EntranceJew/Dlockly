@@ -24,7 +24,5 @@
     "tooltip": "Gets a channel from the guild by its ID",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = ['guild.channels.get(' + Blockly.JavaScript.valueToCode(block, 'id', Blockly.JavaScript.ORDER_ATOMIC) + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL]"
-  }
+  "generator": "_return = ['guild.channels.get(' + Blockly.JavaScript.valueToCode(block, 'id', Blockly.JavaScript.ORDER_ATOMIC) + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL]"
 }

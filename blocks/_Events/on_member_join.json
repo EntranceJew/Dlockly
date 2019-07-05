@@ -19,7 +19,5 @@
     "tooltip": "Triggers when a member joins",
     "helpUrl": ""
   },
-  "generator": {
-    "code": "_return = '\\\\n##### guildMemberAdd #####' + Blockly.JavaScript.statementToCode(block, 'code')"
-  }
+  "generator": "_return = '\\\\n##### guildMemberAdd #####' + Blockly.JavaScript.statementToCode(block, 'code')"
 }
