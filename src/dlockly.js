@@ -24,7 +24,11 @@ module.exports.getExampleXml = function () {
 module.exports.generateXmlTreeRecursively = function (categories) {
   var result = "";
   for (var c of categories) {
-    result += "<category name='" + c.name.replace(/_/g, "") + "' colour='" + c.color + "'>";
+    if (c.name.includes("[sep]")) {
+      result += "<sep></sep>";
+      continue;
+    }
+    result += "<category name='" + c.name.substring(4) + "' colour='" + c.color + "'>";
     result += this.generateXmlTreeRecursively(c.subcategories);
     for (var b of c.blocks) {
       result += "<block type='" + b + "'></block>";
@@ -46,7 +50,7 @@ module.exports.initializeBlocksRecursively = function (p, categories) {
     if (f.startsWith("/") || f.startsWith("\\")) f = f.substring(1);
     if (f.endsWith("/") || f.endsWith("\\")) f.substr(0, f.length - 1);
 
-    var json = JSON.parse(fs.readFileSync(path.join("./blocks/", f)));
+    var json = JSON.parse(fs.readFileSync(path.join("./blocks/custom/", f)));
     var splits = f.split(/[\/\\]+/g);
     splits.pop();
 
@@ -111,13 +115,21 @@ module.exports.initializeCategoriesRecursively = function (p) {
   for (var dir of dirs) {
     result.push({
       name: dir.split(/[\/\\]+/g).pop(),
-      color: Number.parseInt(fs.readFileSync(path.join(dir, "/.color"))),
+      color: this.getColor(dir),
       subcategories: this.initializeCategoriesRecursively(dir),
       blocks: [],
     });
   }
 
   return result;
+}
+
+module.exports.getColor = function (categoryPath) {
+  try {
+    return Number.parseInt(fs.readFileSync(path.join(categoryPath, "/.color")));
+  } catch (e) {
+    return 0;
+  }
 }
 
 module.exports.bumpMessageNumbers = function (message) {
