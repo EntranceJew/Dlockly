@@ -1,32 +1,35 @@
-try {
-  var toReturn = false;
-  if (!auth.sessionValid(req.cookies.auth_userid, req.cookies.auth_session, db)) {
-    res.redirect("/");
-    toReturn = true;
-  }
-  if (!user) {
-    res.redirect("/");
-    toReturn = true;
-  }
-  var guilds = getConfigurableGuilds(user).map(g => g.id);
-  if (!guilds.includes(req.body.guild)) {
-    res.redirect("/");
-    toReturn = true;
-  }
+const fs = require('fs');
+const matchall = require('match-all');
+const path = require('path');
 
-  if (!toReturn) {
-    if (!fs.existsSync(__dirname + "/data/")) fs.mkdirSync(__dirname + "/data/");
-    if (!fs.existsSync(__dirname + "/data/" + req.body.guild)) fs.mkdirSync(__dirname + "/data/" + req.body.guild);
+module.exports = function (data) {
+  try {
+    if (!data.auth.sessionValid(data.req.cookies.auth_userid, data.req.cookies.auth_session, data.db)) {
+      data.res.redirect("/");
+      return;
+    }
+    if (!data.user) {
+      data.res.redirect("/");
+      return;
+    }
+    var guilds = data.discord.getConfigurableGuilds(data.bot, data.user).map(g => g.id);
+    if (!guilds.includes(data.req.body.guild)) {
+      data.res.redirect("/");
+      return;
+    }
 
-    fs.writeFileSync(__dirname + "/data/" + req.body.guild + "/blockly.xml", decodeURIComponent(req.body.xml), {
+    if (!fs.existsSync(path.join(__dirname, "/../../data/"))) fs.mkdirSync(path.join(__dirname, "/../../data/"));
+    if (!fs.existsSync(path.join(__dirname, "/../../data/", data.req.body.guild))) fs.mkdirSync(path.join(__dirname, "/../../data/", data.req.body.guild));
+
+    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/blockly.xml"), decodeURIComponent(data.req.body.xml), {
       flag: "w"
     });
-    fs.writeFileSync(__dirname + "/data/" + req.body.guild + "/bot.txt", decodeURIComponent(req.body.js), {
+    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/bot.txt"), decodeURIComponent(data.req.body.js), {
       flag: "w"
     });
 
     var regex = RegExp("##### (.*?) #####([\\s\\S]*?)(?=(?:$|#####))", "g");
-    var matches = require('match-all')(decodeURIComponent(req.body.js), regex);
+    var matches = matchall(decodeURIComponent(data.req.body.js), regex);
     var obj = {};
 
     match = matches.nextRaw();
@@ -37,16 +40,16 @@ try {
     }
 
     var varRegex = RegExp("^var.*(?=(?:$|\\n))", "g");
-    var match = decodeURIComponent(req.body.js).match(varRegex);
+    var match = decodeURIComponent(data.req.body.js).match(varRegex);
     if (match && match[0]) obj.var = match[0];
 
-    fs.writeFileSync(__dirname + "/data/" + req.body.guild + "/config.json", JSON.stringify(obj), {
+    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/config.json"), JSON.stringify(obj), {
       flag: "w"
     });
 
-    res.redirect("/?guild=" + req.body.guild);
+    data.res.redirect("/?guild=" + data.req.body.guild);
+  } catch (e) {
+    console.error(e);
+    data.res.redirect("/?guild=" + data.req.body.guild + "#error");
   }
-} catch (e) {
-  console.error(e);
-  res.redirect("/?guild=" + req.body.guild);
 }

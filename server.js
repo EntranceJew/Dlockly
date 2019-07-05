@@ -50,7 +50,17 @@ web.all('*', async (req, res) => {
   if (req.path.endsWith(".js") || req.path.endsWith(".css") || req.path.endsWith(".ico") || req.path.endsWith(".html")) {
     res.sendFile(path.join(__dirname, req.path));
   } else if (fs.existsSync(path.join(__dirname, "/src/requests/", req.path + ".js"))) {
-    eval(bin2String(fs.readFileSync(path.join(__dirname, "/src/requests/", req.path + ".js"))));
+    require('./' + path.join('src/requests/', req.path))({
+      auth,
+      authSession,
+      authUserID,
+      bot,
+      db,
+      discord,
+      res,
+      req,
+      user
+    });
   } else {
     if (!auth.sessionValid(authUserID, authSession, db)) {
       res.sendFile(path.join(__dirname, "/www/html/login.html"));
