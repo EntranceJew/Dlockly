@@ -80,13 +80,13 @@ web.all('*', async (req, res) => {
       return;
     }
 
-    var categories = dlockly.initializeCategoriesRecursively("./blocks/custom/");
+    var categories = dlockly.initializeAllCategoriesRecursively();
     var {
       blocks,
       max,
       restrictions,
       generators
-    } = dlockly.initializeBlocksRecursively("./blocks/custom/", categories);
+    } = dlockly.initializeAllBlocks(categories);
 
     res.render("www/html/dlockly.ejs", {
       blocks: blocks,
@@ -96,7 +96,7 @@ web.all('*', async (req, res) => {
       xmlCategoryTree: dlockly.generateXmlTreeRecursively(categories),
       generators: generators,
       blocklyXml: dlockly.getBlocklyXml(req.query.guild),
-      exampleXml: dlockly.getExampleXml()
+      exampleXml: dlockly.getExampleXml(),
     });
   }
 });

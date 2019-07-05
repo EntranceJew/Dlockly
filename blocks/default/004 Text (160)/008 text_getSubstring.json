@@ -1,0 +1,4 @@
+{
+  "type": "text_getSubstring",
+  "extra": "<value name=\"STRING\"><block type=\"variables_get\"><field name=\"VAR\">text variable</field></block></value>"
+}

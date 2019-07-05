@@ -1,0 +1,4 @@
+{
+  "type": "text_append",
+  "extra": "<value name=\"TEXT\"><shadow type=\"text\"></shadow></value>"
+}

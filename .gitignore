@@ -3,7 +3,7 @@ node_modules
 .vscode
 .idea
 .env
-data
+data/*
 .githubsync
 .glitch-assets
 shrinkwrap.yaml
@@ -11,3 +11,4 @@ pull.sh
 pull-f.sh
 push.sh
 push-f.sh
+!/**/.gitkeep

@@ -28,17 +28,62 @@ module.exports.generateXmlTreeRecursively = function (categories) {
       result += "<sep></sep>";
       continue;
     }
-    result += "<category name='" + c.name.substring(4) + "' colour='" + c.color + "'>";
+    result += "<category name='" + c.name.substring(4) + "' colour='" + c.color + "'";
+    if (c.custom) result += " custom='" + c.custom + "'";
+    result += ">";
     result += this.generateXmlTreeRecursively(c.subcategories);
     for (var b of c.blocks) {
-      result += "<block type='" + b + "'></block>";
+      result += "<block type='" + b.type + "'>";
+      if (b.custom) result += b.custom;
+      result += "</block>";
     }
     result += "</category>"
   }
   return result;
 }
 
-module.exports.initializeBlocksRecursively = function (p, categories) {
+module.exports.initializeAllBlocks = function (categories) {
+  var defaultBlocks = initializeDefaultBlocks(path.join(__dirname, "/../blocks/default/"), categories);
+  var customBlocks = initializeCustomBlocks(path.join(__dirname, "/../blocks/custom/"), categories);
+
+  var blocks = customBlocks.blocks.concat(defaultBlocks);
+  var max = customBlocks.max;
+  var restrictions = customBlocks.restrictions;
+  var generators = customBlocks.generators;
+
+  return {
+    blocks,
+    max,
+    restrictions,
+    generators,
+  }
+}
+
+function initializeDefaultBlocks(p, categories) {
+  var blocks = [];
+
+  var files = read(p).filter(f => f.endsWith(".json"));
+
+  for (var f of files) {
+    if (f.startsWith("/") || f.startsWith("\\")) f = f.substring(1);
+    if (f.endsWith("/") || f.endsWith("\\")) f.substr(0, f.length - 1);
+
+    var json = JSON.parse(fs.readFileSync(path.join(p, f)));
+    var splits = f.split(/[\/\\]+/g);
+    splits.pop();
+
+    json.default = true;
+    blocks.push(json);
+
+    var desiredCategoryName = splits.pop();
+    var desiredCategory = findCategoryRecursively(categories, desiredCategoryName);
+    if (desiredCategory) desiredCategory.blocks.push(json);
+  }
+
+  return blocks;
+}
+
+function initializeCustomBlocks(p, categories) {
   var blocks = [];
   var max = {};
   var restrictions = {};
@@ -50,7 +95,7 @@ module.exports.initializeBlocksRecursively = function (p, categories) {
     if (f.startsWith("/") || f.startsWith("\\")) f = f.substring(1);
     if (f.endsWith("/") || f.endsWith("\\")) f.substr(0, f.length - 1);
 
-    var json = JSON.parse(fs.readFileSync(path.join("./blocks/custom/", f)));
+    var json = JSON.parse(fs.readFileSync(path.join(p, f)));
     var splits = f.split(/[\/\\]+/g);
     splits.pop();
 
@@ -68,7 +113,7 @@ module.exports.initializeBlocksRecursively = function (p, categories) {
           "flipRtl": false
         });
 
-        json.block.message0 = this.bumpMessageNumbers(json.block.message0);
+        json.block.message0 = bumpMessageNumbers(json.block.message0);
       }
     }
 
@@ -79,8 +124,12 @@ module.exports.initializeBlocksRecursively = function (p, categories) {
     if (json.restrictions) restrictions[json.block.type] = json.restrictions;
 
     var desiredCategoryName = splits.pop();
-    var desiredCategory = this.findCategoryRecursively(categories, desiredCategoryName);
-    if (desiredCategory) desiredCategory.blocks.push(json.block.type);
+    var desiredCategory = findCategoryRecursively(categories, desiredCategoryName);
+    var obj = {
+      type: json.block.type
+    };
+    if (json.extra) obj.extra = json.extra
+    if (desiredCategory) desiredCategory.blocks.push(obj);
 
     if (json.generator) {
       generators.push({
@@ -98,25 +147,51 @@ module.exports.initializeBlocksRecursively = function (p, categories) {
   };
 }
 
-module.exports.findCategoryRecursively = function (categories, cat) {
+function findCategoryRecursively(categories, cat) {
+  cat = cat.replace(/\([0-9]+\)/g, "");
+  cat = cat.replace(/\[[^s](.*?)\]/g, "");
+  cat = cat.trim();
+
   for (var c of categories) {
     if (c.name == cat) return c;
 
-    var subcat = this.findCategoryRecursively(c.subcategories, cat);
+    var subcat = findCategoryRecursively(c.subcategories, cat);
     if (subcat) return subcat;
   }
 }
 
-module.exports.initializeCategoriesRecursively = function (p) {
+module.exports.initializeAllCategoriesRecursively = function () {
+  var defaultCategories = initializeCategoriesRecursively(path.join(__dirname, "/../blocks/default/"));
+  var customCategories = initializeCategoriesRecursively(path.join(__dirname, "/../blocks/custom/"));
+
+  return defaultCategories.concat(customCategories);
+}
+
+function initializeCategoriesRecursively(p) {
   var isDirectory = source => fs.lstatSync(source).isDirectory();
   var dirs = fs.readdirSync(p).map(name => path.join(p, name)).filter(isDirectory);
 
   var result = [];
   for (var dir of dirs) {
+    var name = dir.split(/[\/\\]+/g).pop();
+
+    var colorRegex = /\([0-9]+\)/g;
+    var colorRegexMatches = colorRegex.exec(name);
+    var color = colorRegexMatches && colorRegexMatches[0] ? colorRegexMatches[0].substring(1, colorRegexMatches[0].length - 1) : "0";
+    name = name.replace(colorRegex, "");
+
+    var customRegex = /\[[^s](.*?)\]/g;
+    var customRegexMatches = customRegex.exec(name);
+    var custom = customRegexMatches && customRegexMatches[0] ? customRegexMatches[0].substring(1, customRegexMatches[0].length - 1) : "";
+    name = name.replace(customRegex, "");
+
+    name = name.trim();
+
     result.push({
-      name: dir.split(/[\/\\]+/g).pop(),
-      color: this.getColor(dir),
-      subcategories: this.initializeCategoriesRecursively(dir),
+      name: name,
+      color: color,
+      custom: custom,
+      subcategories: initializeCategoriesRecursively(dir),
       blocks: [],
     });
   }
@@ -124,15 +199,7 @@ module.exports.initializeCategoriesRecursively = function (p) {
   return result;
 }
 
-module.exports.getColor = function (categoryPath) {
-  try {
-    return Number.parseInt(fs.readFileSync(path.join(categoryPath, "/.color")));
-  } catch (e) {
-    return 0;
-  }
-}
-
-module.exports.bumpMessageNumbers = function (message) {
+function bumpMessageNumbers(message) {
   var str = "%0 " + message;
   var nr = str.match(/%\d+/g).length;
 
