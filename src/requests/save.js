@@ -42,25 +42,7 @@ module.exports = function (data) {
       `);
     }
 
-    Blockly.setTheme(new Blockly.Theme({
-      "list_blocks": {
-        "colourPrimary": "#4a148c",
-        "colourSecondary": "#AD7BE9",
-        "colourTertiary": "#CDB6E9"
-      },
-      "logic_blocks": {
-        "colourPrimary": "#01579b",
-        "colourSecondary": "#64C7FF",
-        "colourTertiary": "#C5EAFF"
-      }
-    }, {
-      "list_category": {
-        "colours": "#4a148c"
-      },
-      "logic_category": {
-        "colour": "#01579b",
-      }
-    }));
+    Blockly.setTheme(Blockly.Themes.Classic);
     var xml = decodeURIComponent(data.req.body.xml);
     var dom = Blockly.Xml.textToDom(xml);
     var workspace = new Blockly.Workspace();

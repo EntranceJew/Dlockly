@@ -10,7 +10,7 @@ const auth = require('./src/auth');
 const discord = require('./src/discord');
 const dlockly = require('./src/dlockly');
 
-var web = express();
+const web = express();
 web.set("views", __dirname);
 web.use(require('express-useragent').express());
 web.use(require('cookie-parser')());
@@ -195,7 +195,7 @@ bot.on("ready", () => {
 });
 
 process.on('unhandledRejection', (reason, p) => {
-  console.log('Unhandled Rejection at: ', p, 'reason:', reason);
+  console.error('Unhandled Rejection at: ', p, 'reason:', reason);
 });
 
 bot.on('error', (e) => {
