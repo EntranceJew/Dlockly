@@ -9,7 +9,6 @@ const path = require('path');
 const auth = require('./src/auth');
 const discord = require('./src/discord');
 const dlockly = require('./src/dlockly');
-const utils = require('./src/utils');
 
 var web = express();
 web.set("views", __dirname);
@@ -181,8 +180,8 @@ bot.on("ready", () => {
         eval(`bot.on('${event}', (${parameters.join(",")}) => {
               if (!(${check})) return;
               var guild = ${guild};
-              if (fs.existsSync(__dirname + "/data/" + guild.id + "/config.json")) {
-                var json = fs.readFileSync(__dirname + "/data/" + guild.id + "/config.json");
+              if (fs.existsSync(path.join(__dirname, "/data/", guild.id, "/config.json"))) {
+                var json = fs.readFileSync(path.join(__dirname, "/data/", guild.id, "/config.json"));
                 var obj = JSON.parse(json);
                 if (obj.var) eval(obj.var);
                 if (obj.${event}) eval(obj.${event});
@@ -206,5 +205,14 @@ bot.on('error', (e) => {
 bot.on('warn', (w) => {
   console.warn(w);
 });
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds) {
+      break;
+    }
+  }
+}
 
 boot();
