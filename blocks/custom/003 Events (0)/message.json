@@ -2,10 +2,18 @@
   "restrictions": [
     {
       "type": "toplevelparent",
-      "message": "The 'message' property may only be used in an 'on message' event",
+      "message": "The 'message' variable may only be used in an 'on message' event",
       "types": [
         "on_message",
         "on_message_delete"
+      ]
+    },
+    {
+      "type": "parent",
+      "message": "The 'message' variable may not be used in a 'run' block",
+      "types": [
+        "run_1",
+        "run_2"
       ]
     }
   ],

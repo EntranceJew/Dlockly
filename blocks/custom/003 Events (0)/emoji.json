@@ -2,10 +2,18 @@
   "restrictions": [
     {
       "type": "toplevelparent",
-      "message": "The 'emoji' property may only be used in an 'on emoji added' or 'on emoji deleted' event",
+      "message": "The 'emoji' variable may only be used in an 'on emoji added' or 'on emoji deleted' event",
       "types": [
         "on_emoji_create",
         "on_emoji_delete"
+      ]
+    },
+    {
+      "type": "parent",
+      "message": "The 'emoji' variable may not be used in a 'run' block",
+      "types": [
+        "run_1",
+        "run_2"
       ]
     }
   ],

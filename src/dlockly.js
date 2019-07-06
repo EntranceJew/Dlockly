@@ -34,7 +34,7 @@ module.exports.generateXmlTreeRecursively = function (categories) {
     result += this.generateXmlTreeRecursively(c.subcategories);
     for (var b of c.blocks) {
       result += "<block type='" + b.type + "'>";
-      if (b.custom) result += b.custom;
+      if (b.extra) result += b.extra;
       result += "</block>";
     }
     result += "</category>"
@@ -124,11 +124,12 @@ function initializeCustomBlocks(p, categories) {
     if (json.restrictions) restrictions[json.block.type] = json.restrictions;
 
     var desiredCategoryName = splits.pop();
+    if (desiredCategoryName.startsWith("add ")) desiredCategoryName = desiredCategoryName.substring(4);
     var desiredCategory = findCategoryRecursively(categories, desiredCategoryName);
     var obj = {
       type: json.block.type
     };
-    if (json.extra) obj.extra = json.extra
+    if (json.extra) obj.extra = json.extra;
     if (desiredCategory) desiredCategory.blocks.push(obj);
 
     if (json.generator) {
@@ -174,6 +175,8 @@ function initializeCategoriesRecursively(p) {
   var result = [];
   for (var dir of dirs) {
     var name = dir.split(/[\/\\]+/g).pop();
+
+    if (name.startsWith("add")) continue;
 
     var colorRegex = /\([0-9]+\)/g;
     var colorRegexMatches = colorRegex.exec(name);

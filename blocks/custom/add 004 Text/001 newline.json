@@ -1,9 +1,9 @@
 {
   "block": {
     "type": "newline",
-    "message0": "new line",
+    "message0": "next line",
     "output": "String",
-    "colour": 330,
+    "colour": 160,
     "tooltip": "Creates a new line in the string. Equivalent to \\n",
     "helpUrl": ""
   },
