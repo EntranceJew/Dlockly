@@ -11,7 +11,7 @@ _Put those long-trained block placing skills to use and make a bot of your own!_
 
 <img src="https://cdn.glitch.com/43f72134-88ea-4e7b-ace8-4a444b9aab78%2FIcon1.png?v=1561542756208" width="100px" height="100px"> 
 
-###### Discord Hack Week 2019 Winner (Productivity; 1st place)
+##### _Discord Hack Week 2019 Winner (Productivity; 1st place)_
 
 ---
 
