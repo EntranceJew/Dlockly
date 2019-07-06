@@ -1,6 +1,10 @@
+const Blockly = require('node-blockly');
 const fs = require('fs');
 const matchall = require('match-all');
 const path = require('path');
+const read = require('fs-readdir-recursive');
+
+require('jsdom-global')();
 
 module.exports = function (data) {
   try {
@@ -21,15 +25,57 @@ module.exports = function (data) {
     if (!fs.existsSync(path.join(__dirname, "/../../data/"))) fs.mkdirSync(path.join(__dirname, "/../../data/"));
     if (!fs.existsSync(path.join(__dirname, "/../../data/", data.req.body.guild))) fs.mkdirSync(path.join(__dirname, "/../../data/", data.req.body.guild));
 
-    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/blockly.xml"), decodeURIComponent(data.req.body.xml), {
+    var blocks = getBlocks(path.join(__dirname, "/../../blocks/custom/"));
+    for (var block of blocks) {
+      eval(`
+        Blockly.JavaScript['${block.block.type}'] = function(block) {
+          var _return;
+          ${block.generator.replace(/\\\\/g, "\\")}
+          return _return;
+        }
+
+        Blockly.Blocks['${block.block.type}'] = {
+          init: function() {
+            this.jsonInit(JSON.parse('${JSON.stringify(block.block).replace(/'/g, "\\'")}'));
+          }
+        }
+      `);
+    }
+
+    Blockly.setTheme(new Blockly.Theme({
+      "list_blocks": {
+        "colourPrimary": "#4a148c",
+        "colourSecondary": "#AD7BE9",
+        "colourTertiary": "#CDB6E9"
+      },
+      "logic_blocks": {
+        "colourPrimary": "#01579b",
+        "colourSecondary": "#64C7FF",
+        "colourTertiary": "#C5EAFF"
+      }
+    }, {
+      "list_category": {
+        "colours": "#4a148c"
+      },
+      "logic_category": {
+        "colour": "#01579b",
+      }
+    }));
+    var xml = decodeURIComponent(data.req.body.xml);
+    var dom = Blockly.Xml.textToDom(xml);
+    var workspace = new Blockly.Workspace();
+    Blockly.Xml.domToWorkspace(dom, workspace);
+    var js = Blockly.JavaScript.workspaceToCode(workspace);
+
+    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/blockly.xml"), xml, {
       flag: "w"
     });
-    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/bot.txt"), decodeURIComponent(data.req.body.js), {
+    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/bot.txt"), js, {
       flag: "w"
     });
 
     var regex = RegExp("##### (.*?) #####([\\s\\S]*?)(?=(?:$|#####))", "g");
-    var matches = matchall(decodeURIComponent(data.req.body.js), regex);
+    var matches = matchall(decodeURIComponent(js), regex);
     var obj = {};
 
     match = matches.nextRaw();
@@ -40,7 +86,7 @@ module.exports = function (data) {
     }
 
     var varRegex = RegExp("^var.*(?=(?:$|\\n))", "g");
-    var match = decodeURIComponent(data.req.body.js).match(varRegex);
+    var match = decodeURIComponent(js).match(varRegex);
     if (match && match[0]) obj.var = match[0];
 
     fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/config.json"), JSON.stringify(obj), {
@@ -52,4 +98,23 @@ module.exports = function (data) {
     console.error(e);
     data.res.redirect("/?guild=" + data.req.body.guild + "#error");
   }
+}
+
+function getBlocks(p) {
+  var blocks = [];
+
+  var files = read(p).filter(f => f.endsWith(".json"));
+
+  for (var f of files) {
+    if (f.startsWith("/") || f.startsWith("\\")) f = f.substring(1);
+    if (f.endsWith("/") || f.endsWith("\\")) f.substr(0, f.length - 1);
+
+    var json = JSON.parse(fs.readFileSync(path.join(p, f)));
+
+    if (!json.generator) json.generator = '_return = \'\';';
+
+    blocks.push(json);
+  }
+
+  return blocks;
 }
