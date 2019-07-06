@@ -18,7 +18,7 @@
         "check": "Member"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "output": "String",
     "colour": 180,
     "tooltip": "Gets the discriminator of a member (the 4 digits after the #)",

@@ -18,7 +18,7 @@
         "check": "Member"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "output": "String",
     "colour": 180,
     "tooltip": "Gets the username of a member",

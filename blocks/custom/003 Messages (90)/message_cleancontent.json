@@ -18,7 +18,7 @@
         "check": "Message"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "output": "String",
     "colour": 90,
     "tooltip": "Gets the clean content of a message",

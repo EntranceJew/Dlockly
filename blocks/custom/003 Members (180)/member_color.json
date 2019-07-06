@@ -18,7 +18,7 @@
         "check": "Member"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "output": [
       "Color",
       "Colour"

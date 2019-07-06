@@ -18,7 +18,7 @@
         "check": "Channel"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "output": "String",
     "colour": 270,
     "tooltip": "Gets the name of a channel",

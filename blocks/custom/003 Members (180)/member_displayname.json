@@ -18,7 +18,7 @@
         "check": "Member"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "output": "String",
     "colour": 180,
     "tooltip": "Gets the display name of a member (their nickname, if they have one, otherwise their username)",

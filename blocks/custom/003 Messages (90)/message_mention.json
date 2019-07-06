@@ -43,7 +43,7 @@
         "check": "Message"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "output": [
       "Member",
       "Role",

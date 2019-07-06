@@ -23,7 +23,7 @@
         "check": "Channel"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "previousStatement": null,
     "nextStatement": null,
     "colour": 270,

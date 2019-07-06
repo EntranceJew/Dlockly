@@ -18,7 +18,7 @@
         "check": "Emoji"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "output": "String",
     "colour": 30,
     "tooltip": "Gets the name of an emoji",

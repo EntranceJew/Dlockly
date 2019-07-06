@@ -137,12 +137,12 @@
         ]
       }
     ],
-    "inputsInline": true,
-    "previousStatement": null,
+    "inputsInline": false,
+    "output": "Boolean",
     "nextStatement": null,
     "colour": 180,
     "tooltip": "Checks the permissions of a member",
     "helpUrl": ""
   },
-  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'member', Blockly.JavaScript.ORDER_ATOMIC) + '.hasPermission(' + block.getFieldValue('perm') + ');'"
+  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'member', Blockly.JavaScript.ORDER_ATOMIC) + '.hasPermission(' + block.getFieldValue('perm') + ')'"
 }

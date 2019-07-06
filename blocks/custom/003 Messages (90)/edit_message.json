@@ -25,7 +25,7 @@
         "align": "RIGHT"
       }
     ],
-    "inputsInline": true,
+    "inputsInline": false,
     "previousStatement": null,
     "nextStatement": null,
     "colour": 90,
