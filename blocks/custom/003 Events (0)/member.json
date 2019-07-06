@@ -7,14 +7,6 @@
         "on_member_join",
         "on_member_leave"
       ]
-    },
-    {
-      "type": "parent",
-      "message": "The 'member' variable may not be used in a 'run' block",
-      "types": [
-        "run_1",
-        "run_2"
-      ]
     }
   ],
   "block": {

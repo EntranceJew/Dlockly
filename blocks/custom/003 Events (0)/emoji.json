@@ -7,14 +7,6 @@
         "on_emoji_create",
         "on_emoji_delete"
       ]
-    },
-    {
-      "type": "parent",
-      "message": "The 'emoji' variable may not be used in a 'run' block",
-      "types": [
-        "run_1",
-        "run_2"
-      ]
     }
   ],
   "block": {
