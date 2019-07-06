@@ -18,7 +18,7 @@
         "check": "String"
       }
     ],
-    "inputsInline": false,
+    "inputsInline": true,
     "output": "Channel",
     "colour": 270,
     "tooltip": "Gets a channel from the guild by its ID",

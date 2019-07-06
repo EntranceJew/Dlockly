@@ -11,7 +11,7 @@
   ],
   "block": {
     "type": "edit_message",
-    "message0": "edit message %1 new text %2",
+    "message0": "edit message %1 to %2",
     "args0": [
       {
         "type": "input_value",
@@ -25,11 +25,13 @@
         "align": "RIGHT"
       }
     ],
+    "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
     "colour": 90,
     "tooltip": "Edits a message sent by the bot",
     "helpUrl": ""
   },
-  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.edit(' + Blockly.JavaScript.valueToCode(block, 'new', Blockly.JavaScript.ORDER_ATOMIC) + ');'"
+  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + '.edit(' + Blockly.JavaScript.valueToCode(block, 'new', Blockly.JavaScript.ORDER_ATOMIC) + ');'",
+  "extra": "<value name=\"new\"><shadow type=\"text\"><field name=\"TEXT\">new text</field></shadow></value>"
 }

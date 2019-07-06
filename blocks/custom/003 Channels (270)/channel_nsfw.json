@@ -18,6 +18,7 @@
         "check": "Channel"
       }
     ],
+    "inputsInline": true,
     "output": "Boolean",
     "colour": 270,
     "tooltip": "Checks if a channel is marked as NSFW or not. Only available for text channels",

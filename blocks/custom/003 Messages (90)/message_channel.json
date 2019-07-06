@@ -18,6 +18,7 @@
         "check": "Message"
       }
     ],
+    "inputsInline": true,
     "output": "Channel",
     "colour": 90,
     "tooltip": "Gets the channel of a message",

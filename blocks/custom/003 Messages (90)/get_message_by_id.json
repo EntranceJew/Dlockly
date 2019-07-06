@@ -25,7 +25,7 @@
         "align": "RIGHT"
       }
     ],
-    "inputsInline": false,
+    "inputsInline": true,
     "output": "Message",
     "colour": 90,
     "tooltip": "Gets a message from a channel by its ID",

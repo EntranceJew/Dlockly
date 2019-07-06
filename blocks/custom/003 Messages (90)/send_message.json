@@ -25,11 +25,13 @@
         "align": "RIGHT"
       }
     ],
+    "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
     "colour": 90,
     "tooltip": "Sends a message to a channel",
     "helpUrl": ""
   },
-  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.send(' + Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + ');'"
+  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'channel', Blockly.JavaScript.ORDER_ATOMIC) + '.send(' + Blockly.JavaScript.valueToCode(block, 'msg', Blockly.JavaScript.ORDER_ATOMIC) + ');'",
+  "extra": "<value name=\"msg\"><shadow type=\"text\"><field name=\"TEXT\">Hi!</field></shadow></value>"
 }

@@ -12,8 +12,7 @@
     "args0": [
       {
         "type": "input_statement",
-        "name": "stuffToRun",
-        "check": "RunnableActionWithResult"
+        "name": "stuffToRun"
       },
       {
         "type": "field_variable",

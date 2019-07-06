@@ -18,6 +18,7 @@
         "check": "Member"
       }
     ],
+    "inputsInline": true,
     "previousStatement": null,
     "nextStatement": null,
     "colour": 180,

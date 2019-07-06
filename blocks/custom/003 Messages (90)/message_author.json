@@ -18,6 +18,7 @@
         "check": "Message"
       }
     ],
+    "inputsInline": true,
     "output": "Member",
     "colour": 90,
     "tooltip": "Gets the author of a message",

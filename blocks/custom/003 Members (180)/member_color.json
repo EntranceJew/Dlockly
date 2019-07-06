@@ -18,7 +18,11 @@
         "check": "Member"
       }
     ],
-    "output": "String",
+    "inputsInline": true,
+    "output": [
+      "Color",
+      "Colour"
+    ],
     "colour": 180,
     "tooltip": "Gets the display color of a member",
     "helpUrl": ""
