@@ -49,12 +49,8 @@ module.exports = function (data) {
     Blockly.Xml.domToWorkspace(dom, workspace);
     var js = Blockly.JavaScript.workspaceToCode(workspace);
 
-    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/blockly.xml"), xml, {
-      flag: "w"
-    });
-    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/bot.txt"), js, {
-      flag: "w"
-    });
+    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/blockly.xml"), xml);
+    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/bot.txt"), js);
 
     var regex = RegExp("##### (.*?) #####([\\s\\S]*?)(?=(?:$|#####))", "g");
     var matches = matchall(decodeURIComponent(js), regex);
@@ -71,9 +67,7 @@ module.exports = function (data) {
     var match = decodeURIComponent(js).match(varRegex);
     if (match && match[0]) obj.var = match[0];
 
-    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/config.json"), JSON.stringify(obj), {
-      flag: "w"
-    });
+    fs.writeFileSync(path.join(__dirname, "/../../data/", data.req.body.guild, "/config.json"), JSON.stringify(obj));
 
     data.res.redirect("/?guild=" + data.req.body.guild);
   } catch (e) {
