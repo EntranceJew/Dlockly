@@ -4,8 +4,6 @@ const matchall = require('match-all');
 const path = require('path');
 const read = require('fs-readdir-recursive');
 
-require('jsdom-global')();
-
 module.exports = function (data) {
   try {
     if (!data.auth.sessionValid(data.req.cookies.auth_userid, data.req.cookies.auth_session, data.db)) {
@@ -42,7 +40,6 @@ module.exports = function (data) {
       `);
     }
 
-    Blockly.setTheme(Blockly.Themes.Classic);
     var xml = decodeURIComponent(data.req.body.xml);
     var dom = Blockly.Xml.textToDom(xml);
     var workspace = new Blockly.Workspace();
