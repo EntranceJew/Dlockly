@@ -3,7 +3,7 @@ node_modules
 .vscode
 .idea
 .env
-data/*
+ddata/*
 .githubsync
 .glitch-assets
 shrinkwrap.yaml

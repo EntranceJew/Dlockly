@@ -1,0 +1,2 @@
+##### message #####  if ((message.cleanContent).startsWith('gay')) {
+    (message.channel).send('no u');}

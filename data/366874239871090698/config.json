@@ -1,0 +1,1 @@
+{"message":"  if ((message.cleanContent).startsWith('gay')) {\n    (message.channel).send('no u');}\n"}

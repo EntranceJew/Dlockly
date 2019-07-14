@@ -1,0 +1,1 @@
+{"message":"  if ((message.cleanContent).startsWith('gosh')) {\n    i = message;(i.channel).send('test');i.edit('[redacted]'}\n","var":"var i;"}

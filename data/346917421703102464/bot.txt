@@ -1,0 +1,6 @@
+var i;
+
+
+
+##### message #####  if ((message.cleanContent).startsWith('gosh')) {
+    i = message;(i.channel).send('test');i.edit('[redacted]'}
