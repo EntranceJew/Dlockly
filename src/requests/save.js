@@ -43,6 +43,7 @@ module.exports = function (data) {
 
     var xml = decodeURIComponent(data.req.body.xml);
     var parsedXml = convert.js2xml(removeOverwrittenShadowsRecursively(convert.xml2js(xml)));
+    parsedXml = parsedXml.replace(/#####/g, "");
     var dom = Blockly.Xml.textToDom(parsedXml);
     var workspace = new Blockly.Workspace();
     Blockly.Xml.domToWorkspace(dom, workspace);
