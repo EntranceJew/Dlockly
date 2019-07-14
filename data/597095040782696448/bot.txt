@@ -1,1 +1,3 @@
 ##### guildMemberAdd #####  (guild.channels.get('598535411358498824')).send((['Hey, ','**',member.user.username,'**,',' welcome to **RailwayLines**! We wish you have a good time here!'].join('')));
+
+##### guildMemberRemove #####  (guild.channels.get('598535411358498824')).send((['**',member.user.username,'**,',' has sadly left **RailwayLines**. Bye! :wave:',''].join('')));
