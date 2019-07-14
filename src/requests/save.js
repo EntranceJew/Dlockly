@@ -1,4 +1,5 @@
 const Blockly = require('node-blockly');
+const convert = require('xml-js');
 const fs = require('fs');
 const matchall = require('match-all');
 const path = require('path');
@@ -41,7 +42,8 @@ module.exports = function (data) {
     }
 
     var xml = decodeURIComponent(data.req.body.xml);
-    var dom = Blockly.Xml.textToDom(xml);
+    var parsedXml = convert.js2xml(removeOverwrittenShadowsRecursively(convert.xml2js(xml)));
+    var dom = Blockly.Xml.textToDom(parsedXml);
     var workspace = new Blockly.Workspace();
     Blockly.Xml.domToWorkspace(dom, workspace);
     var js = Blockly.JavaScript.workspaceToCode(workspace);
@@ -90,4 +92,38 @@ function getBlocks(p) {
   }
 
   return blocks;
+}
+
+function removeOverwrittenShadowsRecursively(obj) {
+  var shadowElement, blockElement;
+  if (obj.elements) {
+    for (var element of obj.elements) {
+      if (element.name == "shadow") shadowElement = element;
+      if (element.name == "block") blockElement = element;
+    }
+  }
+
+  if (shadowElement && blockElement) removeFromArray(obj.elements, shadowElement);
+
+  if (obj.elements) {
+    for (var index in obj.elements) {
+      obj.elements[index] = removeOverwrittenShadowsRecursively(obj.elements[index]);
+    }
+  }
+
+  return obj;
+}
+
+function removeFromArray(arr) {
+  var what,
+    a = arguments,
+    L = a.length,
+    ax;
+  while (L > 1 && arr.length) {
+    what = a[--L];
+    while ((ax = arr.indexOf(what)) !== -1) {
+      arr.splice(ax, 1);
+    }
+  }
+  return arr;
 }
