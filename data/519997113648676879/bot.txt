@@ -1,2 +1,6 @@
-##### message #####  if ('' + String(NaN) == 0) {
+var list_variable;
+
+
+
+##### message #####  if (list_variable[123456] == 'asd') {
   }

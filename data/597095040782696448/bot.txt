@@ -2,7 +2,7 @@ var member, nr;
 
 
 
-##### guildMemberAdd #####  (guild.channels.get('598535411358498824')).send((['Hey, @',member.displayName,'welcome to RailwayLines!'].join('')));
+##### guildMemberAdd #####  (guild.channels.get('598535411358498824')).send((['Hey, ',member.user.username,',',' welcome to RailwayLines!'].join('')));
 
 ##### message #####  if ((message.content).startsWith('!kick ')) {
     member = (message.mentions.members.array()[0]);member.kick();(message.channel).send((['`',member.user.username,'#',member.user.discriminator,'` has been kicked from the server!'].join('')));} else if ((message.content).startsWith('!ban ')) {
