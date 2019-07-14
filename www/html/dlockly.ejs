@@ -133,7 +133,7 @@
 
     document.restrictions = JSON.parse(decode('<%= restrictions %>'));
 
-    //workspace.addChangeListener(Blockly.Events.disableOrphans);
+    workspace.addChangeListener(Blockly.Events.disableOrphans);
 
     if (decode('<%= blocklyXml %>').length > 0) Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(decode("<%= blocklyXml %>")), workspace);
 
