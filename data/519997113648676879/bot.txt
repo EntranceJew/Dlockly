@@ -1,10 +1,2 @@
-var asd, client_token;
-
-
-asd = client_token;
-
-asd;
-
-
-##### message #####  if (true) {
-    (message.channel).send(('Token: ' + String(message.content)));}
+##### message #####  if ('' + String(NaN) == 0) {
+  }

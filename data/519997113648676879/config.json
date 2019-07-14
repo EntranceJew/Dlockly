@@ -1,1 +1,1 @@
-{"message":"  if (true) {\n    (message.channel).send(('Token: ' + String(message.content)));}\n","var":"var asd, client_token;"}
+{"message":"  if ('' + String(NaN) == 0) {\n  }\n"}
