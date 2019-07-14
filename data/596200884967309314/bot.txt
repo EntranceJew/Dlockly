@@ -1,2 +1,2 @@
 ##### message #####  if (message.content == '!hack') {
-    (message.channel).send('test');}
+    (message.channel).send('tes2');}

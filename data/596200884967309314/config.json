@@ -1,1 +1,1 @@
-{"message":"  if (message.content == '!hack') {\n    (message.channel).send('test');}\n"}
+{"message":"  if (message.content == '!hack') {\n    (message.channel).send('tes2');}\n"}
