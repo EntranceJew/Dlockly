@@ -1,5 +1,0 @@
-var Hello;
-
-function do_something(Hello) {
-  return 'Hello';
-}

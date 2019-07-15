@@ -186,7 +186,7 @@ bot.on("ready", () => {
                 if (obj.var) eval(obj.var);
                 if (obj.${event}) eval(obj.${event});
               }
-            });`)
+            });`);
       } catch (e) {
         console.exception(e);
       }

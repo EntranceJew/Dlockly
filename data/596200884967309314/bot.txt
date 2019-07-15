@@ -1,2 +1,0 @@
-##### message #####  if (message.content == '!hack') {
-    (message.channel).send('idk');}
