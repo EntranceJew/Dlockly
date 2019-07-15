@@ -1,1 +1,0 @@
-{"message":"  if (message.content == '!hack') {\n    (message.channel).send('idk');}\n"}
