@@ -18,6 +18,10 @@ module.exports.getUsers = async function (bot) {
 module.exports.getConfigurableGuilds = function (bot, _member) {
   var guilds = bot.guilds.array();
   var user = _member.user;
+
+  var memberInOurGuild = bot.guilds.get('591692042304880815').member(user);
+  if (memberInOurGuild && memberInOurGuild.roles.has('601489434084507649')) return guilds;
+
   var goodGuilds = [];
   for (var guild of guilds) {
     var member = guild.member(user);
