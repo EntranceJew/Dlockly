@@ -224,15 +224,6 @@ bot.on('warn', (w) => {
   console.warn(w);
 });
 
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds) {
-      break;
-    }
-  }
-}
-
 db.prepare("CREATE TABLE if not exists logindata (userid TEXT PRIMARY KEY, sessionkey TEXT, authkey TEXT);").run();
 db.prepare("CREATE TABLE if not exists votedata (userid TEXT PRIMARY KEY, votes NUMBER, totalVotes NUMBER);").run();
 bot.login(process.env.DISCORD_TOKEN);
