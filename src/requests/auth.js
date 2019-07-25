@@ -10,7 +10,7 @@ module.exports = function (data) {
         data.res.redirect("/login#invalidCode");
       } else {
         var bodyObj = {
-          'client_id': process.env.DISCORD_CLIENT_ID,
+          'client_id': data.bot.user.id,
           'client_secret': process.env.DISCORD_CLIENT_SECRET,
           'grant_type': 'authorization_code',
           'redirect_uri': 'https://dlockly.glitch.me/auth',
