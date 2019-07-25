@@ -1,5 +1,4 @@
 {
-  "max": -1,
   "restrictions": [
     {
       "type": "notempty",
@@ -140,10 +139,9 @@
     ],
     "inputsInline": false,
     "output": "Boolean",
-    "nextStatement": null,
     "colour": 180,
     "tooltip": "Checks the permissions of a member",
     "helpUrl": ""
   },
-  "generator": "_return = Blockly.JavaScript.valueToCode(block, 'member', Blockly.JavaScript.ORDER_ATOMIC) + '.hasPermission(' + block.getFieldValue('perm') + ')'"
+  "generator": "_return = [Blockly.JavaScript.valueToCode(block, 'member', Blockly.JavaScript.ORDER_ATOMIC) + '.hasPermission(\"' + block.getFieldValue('perm') + '\")', Blockly.JavaScript.ORDER_FUNCTION_CALL]"
 }
