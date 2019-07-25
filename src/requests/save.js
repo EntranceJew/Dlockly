@@ -15,7 +15,7 @@ module.exports = function (data) {
       data.res.redirect("/");
       return;
     }
-    var guilds = data.discord.getConfigurableGuilds(data.bot, data.user).map(g => g.id);
+    var guilds = data.discord.getConfigurableGuilds(data.bot, data.user).concat(data.discord.getConfigurableGuilds(data.bot, data.user, true)).map(g => g.id);
     if (!guilds.includes(data.req.body.guild)) {
       data.res.redirect("/");
       return;

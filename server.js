@@ -71,10 +71,11 @@ web.all('*', async (req, res) => {
       return;
     }
 
-    if (!discord.getConfigurableGuilds(bot, user).map(g => g.id).includes(req.query.guild)) {
+    if (!discord.getConfigurableGuilds(bot, user).concat(discord.getConfigurableGuilds(bot, user, true)).map(g => g.id).includes(req.query.guild)) {
       res.render("www/html/guildpicker.ejs", {
         user: user,
-        configurableGuilds: discord.getConfigurableGuilds(bot, user),
+        adminGuilds: discord.getConfigurableGuilds(bot, user, true).sort(discord.guildSort),
+        configurableGuilds: discord.getConfigurableGuilds(bot, user).sort(discord.guildSort),
       });
       return;
     }

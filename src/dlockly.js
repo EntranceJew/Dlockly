@@ -4,6 +4,27 @@ const read = require('fs-readdir-recursive');
 
 const icons = require('../config/icons.json');
 
+module.exports.isConfigEmpty = function (id) {
+  var config = JSON.parse(getJsonConfig(id));
+  for (var key in config) {
+    if (config.hasOwnProperty(key) && key != "var") return false;
+  }
+  return true;
+}
+
+function getJsonConfig(id) {
+  if (!fs.existsSync(path.join(__dirname, "/../data"))) {
+    fs.mkdirSync(path.join(__dirname + "/../data"));
+  }
+  if (!fs.existsSync(path.join(__dirname, "/../data/", id))) {
+    fs.mkdirSync(path.join(__dirname, "/../data/", id));
+  }
+  if (!fs.existsSync(path.join(__dirname, "/../data/", id, "/config.json"))) {
+    return '{}';
+  }
+  return fs.readFileSync(path.join(__dirname, "/../data/", id, "/config.json"));
+}
+
 module.exports.getBlocklyXml = function (id) {
   if (!fs.existsSync(path.join(__dirname, "/../data"))) {
     fs.mkdirSync(path.join(__dirname + "/../data"));
