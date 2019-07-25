@@ -17,3 +17,14 @@ table {
 #blocklyArea {
   height: 99%;
 }
+
+form button,
+form input[type='submit'] {
+  font-size: 20px;
+  height: 37px;
+}
+
+tr td div {
+  font-size: 20px;
+  display: inline-block;
+}
