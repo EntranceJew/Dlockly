@@ -24,7 +24,7 @@ const bot = new Discord.Client();
 const dbl = new DBL(process.env.DBL_TOKEN, {
   webhookPort: process.env.PORT,
   webhookAuth: process.env.DBL_WEBHOOK_AUTH,
-  webhookServer: web.listen(process.env.PORT)
+  webhookServer: web.listen(process.env.PORT),
 }, bot);
 const db = require('better-sqlite3')('data/db.db');
 
@@ -199,6 +199,16 @@ bot.on("ready", () => {
 dbl.webhook.on("vote", vote => {
   votes.addVotes(vote.user, vote.isWeekend ? 2 : 1, db);
   var totalVotes = votes.getVotes(vote.user, db);
+  var user = bot.users.get(vote.user);
+  var embed = new Discord.RichEmbed()
+    .setDescription(`<@${vote.user}> has voted!`)
+    .setColor(0x00FF00)
+    .addField("Is Weekend", vote.isWeekend, true)
+    .addField("Total Votes", totalVotes, true)
+    .setFooter(user ? user.tag : "Unknown User", user ? user.avatarURL : undefined);
+  bot.guilds.get('591692042304880815').channels.get('604057075391266827').send({
+    embed
+  });
   console.log(`User with id ${vote.user} just voted! Total: ${totalVotes}`);
 });
 
