@@ -1,14 +1,16 @@
 require('dotenv').config();
 
 const http = require("http");
-const express = require('express');
+const DBL = require('dblapi.js');
 const Discord = require('discord.js');
+const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
 const auth = require('./src/auth');
 const discord = require('./src/discord');
 const dlockly = require('./src/dlockly');
+const votes = require('./src/votes');
 
 const web = express();
 web.set("views", __dirname);
@@ -19,13 +21,12 @@ web.use(require('body-parser').urlencoded({
   extended: false
 }));
 const bot = new Discord.Client();
+const dbl = new DBL(process.env.DBL_TOKEN, {
+  webhookPort: process.env.PORT,
+  webhookAuth: process.env.DBL_WEBHOOK_AUTH,
+  webhookServer: web.listen(process.env.PORT)
+}, bot);
 const db = require('better-sqlite3')('data/db.db');
-
-function boot() {
-  db.prepare("CREATE TABLE if not exists logindata (userid TEXT PRIMARY KEY, sessionkey TEXT, authkey TEXT);").run();
-  web.listen(process.env.PORT);
-  bot.login(process.env.DISCORD_TOKEN);
-}
 
 web.all('*', async (req, res) => {
   if (fs.existsSync(path.join(__dirname, "/config/disable"))) {
@@ -195,6 +196,12 @@ bot.on("ready", () => {
   }
 });
 
+dbl.webhook.on("vote", vote => {
+  votes.addVotes(vote.user, vote.isWeekend ? 2 : 1, db);
+  var totalVotes = votes.getVotes(vote.user, db);
+  console.log(`User with id ${vote.user} just voted! Total: ${totalVotes}`);
+});
+
 process.on('unhandledRejection', (reason, p) => {
   console.error('Unhandled Rejection at: ', p, 'reason:', reason);
 });
@@ -216,4 +223,6 @@ function sleep(milliseconds) {
   }
 }
 
-boot();
+db.prepare("CREATE TABLE if not exists logindata (userid TEXT PRIMARY KEY, sessionkey TEXT, authkey TEXT);").run();
+db.prepare("CREATE TABLE if not exists votedata (userid TEXT PRIMARY KEY, votes NUMBER, totalVotes NUMBER);").run();
+bot.login(process.env.DISCORD_TOKEN);

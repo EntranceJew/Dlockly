@@ -20,17 +20,23 @@
 <body>
   <table>
     <tbody>
-      <tr><td>
-        <form action="/save" method="post" onsubmit="saveConfig()">
-          <input type="hidden" name="guild" id="inputGuild" required>
-          <input type="hidden" name="xml" id="inputXml" required>
-          <input type="submit" id="save" style="font-size:20px;height:37px" value="Save Configuration">
-          <button type="button" id="reset" onclick="resetConfig()" style="font-size:20px;height:37px">Reset Changes</button>
-          <button type="button" id="example" onclick="loadExample()" style="font-size:20px;height:37px; float:right;">Load Example</button>
-        </form>
-      </td></tr>
       <tr>
-        <td id="blocklyArea">
+        <td>
+          <form action="/save" method="post" onsubmit="saveConfig()">
+            <input type="hidden" name="guild" id="inputGuild" required>
+            <input type="hidden" name="xml" id="inputXml" required>
+            <input type="submit" id="save" value="Save Configuration">
+            <button type="button" id="reset" onclick="resetConfig()">Reset Changes</button>
+              <button type="button" id="example" onclick="loadExample()">Load Example</button>
+            <a href="/shop"><button type="button" id="shop" style="float:right;">Block Shop</button></a>
+          </form>
+        </td>
+      </tr>
+      <tr><td id="blocklyArea"></td></tr>
+      <tr>
+        <td>
+          <div><a href='https://discordbots.org/bot/591694201230721043/vote'>Vote</a> &bullet; <a href='https://discord.gg/cnTZNUF'>Support Guild</a></div>
+          <div style="float:right;color:gray;">&copy; 2019 AlexejheroYTB &bullet; Discord Hack Week 2019 Winner (Productivity)</div>
         </td>
       </tr>
     </tbody>
